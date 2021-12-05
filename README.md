@@ -1,6 +1,6 @@
 Membuat website dan databasenya dengan template clothing store
-===========================================================================================================================================
-Persiapan:
+***
+**PERSIAPAN:**
 1. Python 3. (link download untuk windows : https://www.python.org/downloads/windows/)
 2. Pastikan python berada di path environment variable(saat menginstall python ada pilihan untuk menambahkan python di path environment)
 3. Buka cmd lalu jalankan command "pip --version". Jika belum versi terakhir maka jalankan command "py -m pip install --upgrade pip".
@@ -8,8 +8,8 @@ Persiapan:
 5. Setelah itu install microsoft sql untuk django dengan menjalankan command "pip install mssql-django==1.0rc1"
 6. Jika sudah, maka dapat di check apa sudah terinstall django dengan microsoft sql untuk django dengan menjalankan command "pip list". Jika iya maka django dan mssql akan terdapat di list itu, contohnya seperti gambar dibawah ini:
 ![](/contoh_menjalankan_server1.png)
-===========================================================================================================================================
-UNTUK MENJALANKAN SERVER WEBSITE:
+***
+**UNTUK MENJALANKAN SERVER WEBSITE:**
 1. Pastikan memiliki python 3.(link download untuk windows : https://www.python.org/downloads/windows/)
 2. Pastikan telah menginstall django, jika belum maka buka cmd dan jalankan command : "pip install django". (jika error pastikan python berada di path environment variable)
 3. Lalu buka cmd lagi, setelah itu pindah directory ke Django_web. (untuk windows cara simplenya buka file Django_web di file explorer lalu path nya di ubah menjadi cmd dan tinggal tekan enter, liat gambar dibawah untuk contoh)
