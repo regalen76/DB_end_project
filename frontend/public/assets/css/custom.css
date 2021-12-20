@@ -1,3 +1,52 @@
 /*
 Custom Css
 */
+.backdrop {
+  position: fixed;
+  z-index: 888;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: clamp(50%, 60%, 90%);
+  height: min(60%, 50%);
+  top: 25%;
+  left: 20%;
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  z-index: 900;
+}
+
+.save-button {
+  border: none;
+  background-color: white;
+}
+
+.form-control {
+  z-index: 999;
+}
+.save-button2 {
+  border: none;
+  background-color: white;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+.modalform2 {
+  position: relative;
+  top: -120px;
+}
