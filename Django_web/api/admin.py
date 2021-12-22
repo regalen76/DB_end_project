@@ -1,5 +1,7 @@
 from django.contrib import admin
+from rest_framework import serializers
 from .models import Customer
+from .serializers import CustomerSerializer
 
 # Register your models here.
 

@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework import serializers
 from rest_framework.relations import ManyRelatedField
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.serializers import Serializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Customer
-from .serializers import CustomerSerializer
+from .serializers import CustomerSerializer,RegistrationSerializer
 
 # Create your views here.
 
@@ -47,3 +50,18 @@ def getCustomer(request, pk):
     customers = Customer.objects.raw("SELECT * FROM Customer WHERE customerID = %s",[pk])
     serializer = CustomerSerializer(customers, many=True)
     return Response (serializer.data)
+
+@api_view(['POST',])
+def registration_view(request):
+
+    if request.method == 'POST':
+        serializer = RegistrationSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            account = serializer.save()
+            data['response'] = "successfully registered a new user."
+            data['email'] = account.email
+            data['username'] = account.username
+        else:
+            data = serializer.errors
+        return Response(data)
