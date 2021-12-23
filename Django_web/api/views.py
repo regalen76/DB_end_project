@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework import serializers
+from rest_framework import permissions
 from rest_framework.relations import ManyRelatedField
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.serializers import Serializer
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Customer
@@ -34,12 +36,15 @@ def getRoutes(request):
         {
             '/api/token',
             '/api/token/refresh',
+            '/customers/',
+            '/register/',
         },
     ]
 
     return Response(routes)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getCustomers(request):
     customers = Customer.objects.raw("SELECT * FROM Customer")
     serializer = CustomerSerializer(customers, many=True)

@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import Backdrop from "./backdrop";
 import useForm from "./hooks/useForm";
+import { useContext } from "react";
+import AuthContext from "../../utils/AuthContext";
+import { Link } from "react-router-dom";
 
 const dropIn = {
   hidden: {
@@ -65,8 +68,11 @@ const doped2 = {
   },
 };
 
+//modal belum login
 const Modal = ({ handleClose }) => {
   const { formOpen, close, open } = useForm();
+
+  let {loginUser,register} = useContext(AuthContext)
 
   return (
     <Backdrop onClick={handleClose}>
@@ -79,8 +85,7 @@ const Modal = ({ handleClose }) => {
         exit="exit"
       >
         <motion.form
-          action=""
-          method="post"
+          onSubmit={loginUser}
           onClick={(e) => e.stopPropagation()}
           className="modalform orange-gradient"
           variants={formOpen ? dropOut2 : dropOut}
@@ -98,16 +103,18 @@ const Modal = ({ handleClose }) => {
             <tr>
               <th>Password</th>
               <td>
-                <input name="password" type="text" className="form-control" />
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
               </td>
             </tr>
             <input type="submit" />
           </tbody>
         </motion.form>
         <motion.form
-          action=""
-          method="post"
-          onClick={(e) => e.stopPropagation()}
+          onSubmit={register}
           className="modalform2 orange-gradient"
           variants={formOpen ? doped : doped2}
           initial="visible"
@@ -118,13 +125,13 @@ const Modal = ({ handleClose }) => {
             <tr>
               <th>Username</th>
               <td>
-                <input name="username" type="text" className="form-control" />
+                <input name="username2" type="text" className="form-control" />
               </td>
             </tr>
             <tr>
               <th>Password</th>
               <td>
-                <input name="password" type="text" className="form-control" />
+                <input name="password2" type="password" className="form-control" />
               </td>
             </tr>
             <tr>
@@ -154,9 +161,9 @@ const Modal = ({ handleClose }) => {
             <tr>
               <th>Gender</th>
               <td>
-                <input type="radio" name="Gender" />
+                <input type="radio" name="gender" />
                 Male
-                <input type="radio" name="Gender" />
+                <input type="radio" name="gender" />
                 Female
               </td>
             </tr>
@@ -175,7 +182,8 @@ const Modal = ({ handleClose }) => {
           className="save-button2"
           onClick={() => (formOpen ? close() : open())}
         >
-          {formOpen ? "login disini" : "belum daftar ?"}
+        {
+      formOpen ? "login disini" : "belum daftar ?"}
         </motion.button>
       </motion.div>
     </Backdrop>
@@ -183,3 +191,25 @@ const Modal = ({ handleClose }) => {
 };
 
 export default Modal;
+
+//modal setelah login
+export const Modal2 = ({ handleClose }) => {
+  const { formOpen, close, open } = useForm();
+
+  let {logoutUser} = useContext(AuthContext)
+
+  return (
+    <Backdrop onClick={handleClose}>
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        className="modal orange-gradient"
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <button onClick={logoutUser}>Logout</button>
+      </motion.div>
+    </Backdrop>
+  );
+};

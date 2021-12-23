@@ -1,22 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import AuthContext from "../utils/AuthContext";
 import { Header } from "./components/header";
 
 const Customers = () => {
   let [notes, setNotes] = useState([]);
+  let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getNotes();
+      getNotes();
   }, []);
 
   let getNotes = async () => {
-    let response = await fetch("/api/customers/");
+    let response = await fetch("/api/customers/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + String(authTokens.access),
+      },
+    });
     let data = await response.json();
-    setNotes(data);
-  };
 
-  console.log("DATA:", notes);
+    if (response.status === 200) {
+      setNotes(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
 
   return (
     <div>
@@ -54,6 +65,7 @@ export class Home extends React.Component {
     return (
       <div>
         <Header />
+        <Customers />
         <div
           id="template-mo-zay-hero-carousel"
           className="carousel slide"

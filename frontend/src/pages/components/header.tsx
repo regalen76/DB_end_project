@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./modal";
+import { Modal2 } from "./modal";
 import useModal from "./hooks/useModal";
+import AuthContext from "../../utils/AuthContext";
 
 export const Header = () => {
   const { modalOpen, close, open } = useModal();
+  let {user} = useContext(AuthContext)
 
   return (
     <div>
@@ -61,6 +64,11 @@ export const Header = () => {
             </div>
             <div className="navbar align-self-center d-flex">
               <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3"></div>
+              <p
+                className="nav-icon position-relative text-decoration-none"
+              >
+                {user && <p>Hello {user.username}</p>}
+              </p>
               <a
                 className="nav-icon position-relative text-decoration-none"
                 href="#"
@@ -81,9 +89,13 @@ export const Header = () => {
               <AnimatePresence
                 initial={false}
                 exitBeforeEnter={true}
-                onExitComplete={() => null}
+                onExitComplete={() => window.location.reload()}
               >
-                {modalOpen && <Modal handleClose={close} />}
+              {user ? (
+                modalOpen === true && <Modal2 handleClose={close} />
+              ): (
+                modalOpen === true && <Modal handleClose={close} />
+              )}
               </AnimatePresence>
             </div>
           </div>
