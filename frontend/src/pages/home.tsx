@@ -13,7 +13,7 @@ const Customers = () => {
   }, []);
 
   let getNotes = async () => {
-    let response = await fetch("/api/customers/", {
+    let response = await fetch("/api/account/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -34,19 +34,17 @@ const Customers = () => {
       {notes.map(
         ({
           address,
-          customerid,
+          id,
           email,
           firstname,
           gender,
           lastname,
-          password,
           phone,
           username,
         }) => (
-          <h3 key={customerid}>
-            {customerid}
+          <h3 key={id}>
+            {id}
             {username}
-            {password}
             {email}
             {firstname}
             {lastname}

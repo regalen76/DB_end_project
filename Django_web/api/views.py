@@ -9,8 +9,8 @@ from rest_framework.serializers import Serializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import Customer
-from .serializers import CustomerSerializer,RegistrationSerializer
+from .models import Account
+from .serializers import RegistrationSerializer,AccountSerializer
 
 # Create your views here.
 
@@ -36,7 +36,8 @@ def getRoutes(request):
         {
             '/api/token',
             '/api/token/refresh',
-            '/customers/',
+            '/api/accounts',
+            '/api/account',
             '/register/',
         },
     ]
@@ -45,15 +46,18 @@ def getRoutes(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getCustomers(request):
-    customers = Customer.objects.raw("SELECT * FROM Customer")
-    serializer = CustomerSerializer(customers, many=True)
+def getAccount(request):
+    current_user = request.user
+    accounts = Account.objects.raw("SELECT * FROM api_account WHERE id = %s",[current_user.id])
+    serializer = AccountSerializer(accounts, many=True)
     return Response (serializer.data)
 
 @api_view(['GET'])
-def getCustomer(request, pk):
-    customers = Customer.objects.raw("SELECT * FROM Customer WHERE customerID = %s",[pk])
-    serializer = CustomerSerializer(customers, many=True)
+@permission_classes([IsAuthenticated])
+def getAccounts(request):
+    current_user = request.user
+    accounts = Account.objects.raw("SELECT * FROM api_account")
+    serializer = AccountSerializer(accounts, many=True)
     return Response (serializer.data)
 
 @api_view(['POST',])
@@ -67,6 +71,11 @@ def registration_view(request):
             data['response'] = "successfully registered a new user."
             data['email'] = account.email
             data['username'] = account.username
+            data['first_name']= account.first_name
+            data['last_name']= account.last_name
+            data['phone']=account.phone
+            data['gender']=account.gender
+            data['address']=account.address
         else:
             data = serializer.errors
         return Response(data)

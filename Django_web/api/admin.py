@@ -1,11 +1,10 @@
 from django.contrib import admin
 from rest_framework import serializers
-from .models import Customer
-from .serializers import CustomerSerializer
+from .models import Account
 
 # Register your models here.
 
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['username', 'password', 'email', 'firstname', 'lastname', 'phone', 'gender', 'address']
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['id','username', 'password', 'email', 'first_name', 'last_name', 'phone', 'gender', 'address','date_joined','last_login','is_superuser','is_admin','is_staff']
 
-admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Account, AccountAdmin)

@@ -95,9 +95,9 @@ const Modal = ({ handleClose }) => {
         >
           <tbody>
             <tr>
-              <th>Username</th>
+              <th>Email</th>
               <td>
-                <input name="username" type="text" className="form-control" />
+                <input name="email" type="text" className="form-control" />
               </td>
             </tr>
             <tr>
@@ -135,9 +135,15 @@ const Modal = ({ handleClose }) => {
               </td>
             </tr>
             <tr>
+              <th>Ulangi Password</th>
+              <td>
+                <input name="password22" type="password" className="form-control" />
+              </td>
+            </tr>
+            <tr>
               <th>Email</th>
               <td>
-                <input name="email" type="text" className="form-control" />
+                <input name="email2" type="text" className="form-control" />
               </td>
             </tr>
             <tr>
@@ -161,9 +167,9 @@ const Modal = ({ handleClose }) => {
             <tr>
               <th>Gender</th>
               <td>
-                <input type="radio" name="gender" />
+                <input type="radio" name="gender" value="Male" />
                 Male
-                <input type="radio" name="gender" />
+                <input type="radio" name="gender" value="Female"/>
                 Female
               </td>
             </tr>

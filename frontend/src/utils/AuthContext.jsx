@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: e.target.username.value,
+        email: e.target.email.value,
         password: e.target.password.value,
       }),
     });
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   let register = async (x) => {
-    let response = await fetch('/api/register/', {
+    await fetch('/api/register/', {
       method: "POST",
       headers:  {
         'Content-Type': 'application/json'
@@ -80,7 +80,8 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({
         username: x.target.username2.value,
         password: x.target.password2.value,
-        email: x.target.email.value,
+        password2: x.target.password22.value,
+        email: x.target.email2.value,
         first_name: x.target.first_name.value,
         last_name: x.target.last_name.value,
         phone: x.target.phone.value,
@@ -88,8 +89,6 @@ export const AuthProvider = ({ children }) => {
         address: x.target.address.value,
       }),
     })
-    let data = await response.json();
-    console.log(data)
   }
 
   let contextData = {

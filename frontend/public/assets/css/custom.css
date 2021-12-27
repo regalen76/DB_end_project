@@ -16,8 +16,8 @@ Custom Css
 
 .modal {
   width: clamp(50%, 60%, 90%);
-  height: min(60%, 50%);
-  top: 25%;
+  height: min(70%, 65%);
+  top: 17.5%;
   left: 20%;
   margin: auto;
   padding: 0 2rem;
@@ -41,7 +41,7 @@ Custom Css
   border: none;
   background-color: white;
   position: relative;
-  top: -150px;
+  top: -100px;
 }
 
 *:focus {

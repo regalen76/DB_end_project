@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
@@ -111,6 +112,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'api.Account'
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -127,7 +130,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'django-web',
+        'NAME': 'django-web2',
         'USER': 'Ashen',
         'PASSWORD': 'passworddatabase',
         'HOST': 'LAPTOP-954EKP18',

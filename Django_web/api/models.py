@@ -2,23 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
-class Customer(models.Model):
-    customerid = models.CharField(db_column='customerID', primary_key=True, max_length=50)  # Field name made lowercase.
-    username = models.CharField(db_column='userName', max_length=50)  # Field name made lowercase.
-    password = models.CharField(max_length=50)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    firstname = models.CharField(db_column='firstName', max_length=50)  # Field name made lowercase.
-    lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
-    phone = models.CharField(max_length=50, blank=True, null=True)
-    gender = models.CharField(max_length=10, blank=True, null=True)
-    address = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'Customer'
-    def __str__(self):
-        return self.customerid
-
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
 		if not email:
@@ -47,7 +30,7 @@ class MyAccountManager(BaseUserManager):
 		user.save(using=self._db)
 		return user
 
-class AuthUser(AbstractBaseUser):
+class Account(AbstractBaseUser):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True, auto_now=True)
     is_superuser = models.BooleanField(default=False)
@@ -57,7 +40,11 @@ class AuthUser(AbstractBaseUser):
     email = models.EmailField(max_length=254, unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+    phone = models.CharField(max_length=20)
+    gender = models.CharField(max_length=10)
+    address = models.CharField(max_length=300)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -72,7 +59,3 @@ class AuthUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
