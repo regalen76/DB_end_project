@@ -6,7 +6,7 @@ from rest_framework.relations import ManyRelatedField
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.serializers import Serializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Account
@@ -53,7 +53,7 @@ def getAccount(request):
     return Response (serializer.data)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def getAccounts(request):
     current_user = request.user
     accounts = Account.objects.raw("SELECT * FROM api_account")
