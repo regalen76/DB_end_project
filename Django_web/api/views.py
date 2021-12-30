@@ -1,3 +1,4 @@
+from django.db import connection
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework import serializers
@@ -9,8 +10,8 @@ from rest_framework.serializers import Serializer
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import Account
-from .serializers import RegistrationSerializer,AccountSerializer
+from .models import Account,Cart,Cartitem
+from .serializers import RegistrationSerializer,AccountSerializer,PriceSerializer
 
 # Create your views here.
 
@@ -38,7 +39,10 @@ def getRoutes(request):
             '/api/token/refresh',
             '/api/accounts',
             '/api/account',
-            '/register/',
+            '/api/register/',
+            '/api/price/',
+            '/api/items/',
+            '/api/carts/',
         },
     ]
 
@@ -59,6 +63,34 @@ def getAccounts(request):
     accounts = Account.objects.raw("SELECT * FROM api_account")
     serializer = AccountSerializer(accounts, many=True)
     return Response (serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getTotalPrice(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("UPDATE cart SET totalpayment = OtherTable.total_price FROM(SELECT SUM(cartitem.quantity * product.price) AS total_price FROM cartitem JOIN productsize ON cartitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid) AS OtherTable WHERE cart.userid = %s",(current_user.id,current_user.id))
+        cursor.execute("SELECT * FROM cart WHERE userid = %s",[current_user.id])
+        row = cursor.fetchone()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getTotalItem(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT COUNT(cartitemid) AS total_item FROM cartitem,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid",[current_user.id])
+        row = cursor.fetchone()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getCart(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT product.productname,productsize.productsize,cartitem.quantity,product.price,cartitem.quantity * product.price AS subtotal,cartitem.cartitemid FROM cartitem JOIN productsize ON cartitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid",[current_user.id])
+        row = cursor.fetchall()
+    return Response (row)
 
 @api_view(['POST',])
 def registration_view(request):

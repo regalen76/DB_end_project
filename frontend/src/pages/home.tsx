@@ -4,66 +4,11 @@ import { Link } from "react-router-dom";
 import AuthContext from "../utils/AuthContext";
 import { Header } from "./components/header";
 
-const Customers = () => {
-  let [notes, setNotes] = useState([]);
-  let { authTokens, logoutUser } = useContext(AuthContext);
-
-  useEffect(() => {
-      getNotes();
-  }, []);
-
-  let getNotes = async () => {
-    let response = await fetch("/api/account/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + String(authTokens.access),
-      },
-    });
-    let data = await response.json();
-
-    if (response.status === 200) {
-      setNotes(data);
-    } else if (response.statusText === "Unauthorized") {
-      logoutUser();
-    }
-  };
-
-  return (
-    <div>
-      {notes.map(
-        ({
-          address,
-          id,
-          email,
-          firstname,
-          gender,
-          lastname,
-          phone,
-          username,
-        }) => (
-          <h3 key={id}>
-            {id}
-            {username}
-            {email}
-            {firstname}
-            {lastname}
-            {phone}
-            {gender}
-            {address}
-          </h3>
-        )
-      )}
-    </div>
-  );
-};
-
 export class Home extends React.Component {
   render() {
     return (
       <div>
         <Header />
-        <Customers />
         <div
           id="template-mo-zay-hero-carousel"
           className="carousel slide"

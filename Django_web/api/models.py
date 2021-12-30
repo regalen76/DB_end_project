@@ -59,3 +59,125 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+class Cart(models.Model):
+    cartid = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(Account, models.DO_NOTHING, db_column='userid')
+    totalpayment = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cart'
+
+    def __int__(self):
+        return self.cartid
+
+class Cartitem(models.Model):
+    cartitemid = models.BigIntegerField(primary_key=True)
+    cartid = models.ForeignKey(Cart, models.DO_NOTHING, db_column='cartid')
+    sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
+    quantity = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cartitem'
+
+    def __int__(self):
+        return self.cartitemid
+
+class Category(models.Model):
+    categoryid = models.BigIntegerField(primary_key=True)
+    categoryname = models.CharField(max_length=20, blank=True, null=True)
+    totalpercategory = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
+
+    def __int__(self):
+        return self.categoryid
+
+class Orderitem(models.Model):
+    orderitemid = models.BigIntegerField(primary_key=True)
+    orderid = models.ForeignKey('Orderlist', models.DO_NOTHING, db_column='orderid')
+    sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
+    quantity = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'orderitem'
+
+    def __int__(self):
+        return self.orderitemid
+
+class Orderlist(models.Model):
+    orderid = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(Account, models.DO_NOTHING, db_column='userid')
+    paymentid = models.ForeignKey('Paymentdetail', models.DO_NOTHING, db_column='paymentid')
+    receivername = models.CharField(max_length=150, blank=True, null=True)
+    receiverphone = models.CharField(max_length=20, blank=True, null=True)
+    receiveraddress = models.CharField(max_length=300, blank=True, null=True)
+    orderdate = models.DateTimeField(blank=True, null=True)
+    totalpayment = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+    orderstatus = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'orderlist'
+
+    def __int__(self):
+        return self.orderid
+
+class Paymentdetail(models.Model):
+    paymentid = models.BigIntegerField(primary_key=True)
+    paymenttype = models.CharField(max_length=20, blank=True, null=True)
+    transactiontime = models.DateTimeField(blank=True, null=True)
+    paymentstatus = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'paymentdetail'
+
+    def __int__(self):
+        return self.paymentid
+
+class Product(models.Model):
+    productid = models.BigIntegerField(primary_key=True)
+    categoryid = models.ForeignKey(Category, models.DO_NOTHING, db_column='categoryid')
+    productname = models.CharField(max_length=50, blank=True, null=True)
+    productdesc = models.CharField(max_length=300, blank=True, null=True)
+    price = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'product'
+
+    def __int__(self):
+        return self.productid
+
+class Productsize(models.Model):
+    sizeid = models.BigIntegerField(primary_key=True)
+    productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
+    productsize = models.CharField(max_length=5, blank=True, null=True)
+    stock = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'productsize'
+
+    def __int__(self):
+        return self.sizeid
+
+class Reviewid(models.Model):
+    reviewid = models.BigIntegerField(primary_key=True)
+    productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
+    orderid = models.ForeignKey(Orderlist, models.DO_NOTHING, db_column='orderid')
+    rating = models.DecimalField(max_digits=18, decimal_places=0, blank=True, null=True)
+    note = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reviewid'
+
+    def __int__(self):
+        return self.reviewid

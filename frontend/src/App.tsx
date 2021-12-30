@@ -3,6 +3,7 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Shopsingle from "./pages/shop-single";
 import Shop from "./pages/shop";
+import Cart from "./pages/cart"
 import "./App.css";
 import { BrowserRouter, Outlet, Route, Routes, Navigate } from "react-router-dom";
 import { AuthProvider } from './utils/AuthContext'
@@ -32,6 +33,7 @@ function App() {
               <Route path="" element={<Shopsingle/>} />
             </Route>
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

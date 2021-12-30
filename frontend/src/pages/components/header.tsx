@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext,useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./modal";
@@ -7,9 +7,42 @@ import { Modal2 } from "./modal";
 import useModal from "./hooks/useModal";
 import AuthContext from "../../utils/AuthContext";
 
+const Items = () => {
+  let [notes, setNotes] = useState([]);
+  let { authTokens, logoutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+      getNotes();
+  }, []);
+
+  let getNotes = async () => {
+    let response = await fetch("/api/items/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      setNotes(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+
+  return (
+    <div>
+      {notes[0]}
+    </div>
+  );
+};
+
 export const Header = () => {
   const { modalOpen, close, open } = useModal();
   let {user} = useContext(AuthContext)
+  let navigate = useNavigate()
 
   return (
     <div>
@@ -69,15 +102,19 @@ export const Header = () => {
               >
                 {user && <p>Hello {user.username}</p>}
               </p>
-              <a
-                className="nav-icon position-relative text-decoration-none"
-                href="#"
+              <motion.button
+                className="nav-icon position-relative text-decoration-none save-button"
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  navigate("/cart")
+                }}
               >
                 <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                 <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                  7
+                  <Items/>
                 </span>
-              </a>
+              </motion.button>
               <motion.button
                 whileHover={{ scale: 1.3 }}
                 whileTap={{ scale: 0.9 }}

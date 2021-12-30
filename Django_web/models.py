@@ -8,20 +8,26 @@
 from django.db import models
 
 
-class Customer(models.Model):
-    customerid = models.CharField(db_column='customerID', primary_key=True, max_length=50)  # Field name made lowercase.
-    username = models.CharField(db_column='userName', max_length=50)  # Field name made lowercase.
-    password = models.CharField(max_length=50)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    firstname = models.CharField(db_column='firstName', max_length=50)  # Field name made lowercase.
-    lastname = models.CharField(db_column='lastName', max_length=50)  # Field name made lowercase.
-    phone = models.CharField(max_length=50, blank=True, null=True)
-    gender = models.CharField(max_length=10, blank=True, null=True)
-    address = models.CharField(max_length=50, blank=True, null=True)
+class ApiAccount(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(unique=True, max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+    phone = models.CharField(max_length=20)
+    gender = models.CharField(max_length=10)
+    address = models.CharField(max_length=300)
+    is_admin = models.BooleanField()
 
     class Meta:
         managed = False
-        db_table = 'Customer'
+        db_table = 'api_account'
 
 
 class AuthGroup(models.Model):
@@ -54,43 +60,35 @@ class AuthPermission(models.Model):
         unique_together = (('content_type', 'codename'),)
 
 
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.BooleanField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateTimeField()
+class Cart(models.Model):
+    cartid = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(ApiAccount, models.DO_NOTHING, db_column='userid')
+    totalpayment = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'auth_user'
+        db_table = 'cart'
 
 
-class AuthUserGroups(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+class Cartitem(models.Model):
+    cartitemid = models.BigIntegerField(primary_key=True)
+    cartid = models.ForeignKey(Cart, models.DO_NOTHING, db_column='cartid')
+    sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
+    quantity = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
+        db_table = 'cartitem'
+
+
+class Category(models.Model):
+    categoryid = models.BigIntegerField(primary_key=True)
+    categoryname = models.CharField(max_length=20, blank=True, null=True)
+    totalpercategory = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
 
 
 class DjangoAdminLog(models.Model):
@@ -100,7 +98,7 @@ class DjangoAdminLog(models.Model):
     action_flag = models.SmallIntegerField()
     change_message = models.TextField()
     content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    user = models.ForeignKey(ApiAccount, models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -136,3 +134,89 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+
+class Orderitem(models.Model):
+    orderitemid = models.BigIntegerField(primary_key=True)
+    orderid = models.ForeignKey('Orderlist', models.DO_NOTHING, db_column='orderid')
+    sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
+    quantity = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'orderitem'
+
+
+class Orderlist(models.Model):
+    orderid = models.BigIntegerField(primary_key=True)
+    userid = models.ForeignKey(ApiAccount, models.DO_NOTHING, db_column='userid')
+    paymentid = models.ForeignKey('Paymentdetail', models.DO_NOTHING, db_column='paymentid')
+    receivername = models.CharField(max_length=150, blank=True, null=True)
+    receiverphone = models.CharField(max_length=20, blank=True, null=True)
+    receiveraddress = models.CharField(max_length=300, blank=True, null=True)
+    orderdate = models.DateTimeField(blank=True, null=True)
+    totalpayment = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+    orderstatus = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'orderlist'
+
+
+class Paymentdetail(models.Model):
+    paymentid = models.BigIntegerField(primary_key=True)
+    paymenttype = models.CharField(max_length=20, blank=True, null=True)
+    transactiontime = models.DateTimeField(blank=True, null=True)
+    paymentstatus = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'paymentdetail'
+
+
+class Product(models.Model):
+    productid = models.BigIntegerField(primary_key=True)
+    categoryid = models.ForeignKey(Category, models.DO_NOTHING, db_column='categoryid')
+    productname = models.CharField(max_length=50, blank=True, null=True)
+    productdesc = models.CharField(max_length=300, blank=True, null=True)
+    price = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'product'
+
+
+class Productsize(models.Model):
+    sizeid = models.BigIntegerField(primary_key=True)
+    productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
+    productsize = models.CharField(max_length=5, blank=True, null=True)
+    stock = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'productsize'
+
+
+class Reviewid(models.Model):
+    reviewid = models.BigIntegerField(primary_key=True)
+    productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
+    orderid = models.ForeignKey(Orderlist, models.DO_NOTHING, db_column='orderid')
+    rating = models.DecimalField(max_digits=18, decimal_places=0, blank=True, null=True)
+    note = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reviewid'
+
+
+class Sysdiagrams(models.Model):
+    name = models.CharField(max_length=128)
+    principal_id = models.IntegerField()
+    diagram_id = models.AutoField(primary_key=True)
+    version = models.IntegerField(blank=True, null=True)
+    definition = models.BinaryField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'sysdiagrams'
+        unique_together = (('principal_id', 'name'),)
