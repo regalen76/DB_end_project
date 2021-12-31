@@ -22,29 +22,66 @@ const Items = () => {
     });
     let data = await response.json();
 
-    console.log(data)
-
     if (response.status === 200) {
       setNotes(data);
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
   };
+  
+  let deleteCartItem = async (e) => {
+    let id = e.currentTarget.parentNode.parentNode.getAttribute('data-index')
+    let response = await fetch(`/api/carts/${id}/delete/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + String(authTokens.access),
+      },
+    });
+    await response.json();
 
-  const handler = function(event){
-    console.log(event.target.getAttribute("data-index"))
+    if (response.status === 200) {
+      window.location.reload()
+    } else {
+      logoutUser();
+    }
+
   };
+
+  let UpdateQuantityItem = async (e) => {
+    let id = e.currentTarget.parentNode.parentNode.getAttribute('data-index')
+    let response = await fetch(`/api/carts/${id}/${quantity.text}/update/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + String(authTokens.access),
+      },
+    });
+    await response.json();
+
+    if (response.status === 200) {
+      window.location.reload()
+    } else {
+      logoutUser();
+    }
+
+  };
+  
+
+  let [quantity, setQuantity] = useState([]);
+  let [showButton, setShowButton] = useState(false)
 
   return (
     <div>
       {notes.map((user) => (
-          <table className="table-bawah" data-index={user[5]} key={user[5]}>
+          <table className="table-bawah" data-index={user[5]} key={user[5]} >
               <tr>
                   <td >{user[0]} {user[1]}</td>
-                  <td>{user[2]}</td>
+                  <td><input type="number" defaultValue={user[2]} name="quantity" onChange={e => { setQuantity({ text: e.target.value }); setShowButton(true);}}></input></td>
                   <td>{user[3]}</td>
                   <td>{user[4]}</td>
-                  <button onClick={ handler }>DELETE</button>
+                  <button onClick={ deleteCartItem }>DELETE</button>
+                  { showButton ? <button onClick={UpdateQuantityItem}>SAVE</button> : null}
               </tr>
           </table>
       ))}
@@ -53,7 +90,7 @@ const Items = () => {
   );
 };
 
-const Totalprice = () => {
+  const Totalprice = () => {
     let [notes, setNotes] = useState([]);
     let { authTokens, logoutUser } = useContext(AuthContext);
   
@@ -108,6 +145,7 @@ export class Home extends React.Component {
                     <th>Quantity</th>
                     <th>Unit Price</th>
                     <th>Subtotal</th>
+                    <th>Action</th>
                 </tr>
               </table>
           </div>

@@ -13,6 +13,8 @@ urlpatterns = [
     path('price/', views.getTotalPrice, name='Prices'),
     path('items/', views.getTotalItem, name='Prices'),
     path('carts/', views.getCart, name='carts'),
+    path('carts/<str:pk>/delete/', views.deleteCart, name='deletecart'),
+    path('carts/<str:pk>/<str:qt>/update/', views.updateCart, name='updatecart'),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

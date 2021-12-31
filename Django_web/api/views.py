@@ -92,6 +92,24 @@ def getCart(request):
         row = cursor.fetchall()
     return Response (row)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def deleteCart(request, pk):
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM cartitem WHERE cartitemid = %s",[pk])
+        cursor.execute("SELECT * FROM cartitem")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def updateCart(request, pk, qt):
+    with connection.cursor() as cursor:
+        cursor.execute("UPDATE cartitem SET quantity = %s WHERE cartitemid = %s",(qt,pk))
+        cursor.execute("SELECT * FROM cartitem")
+        row = cursor.fetchall()
+    return Response (row)
+
 @api_view(['POST',])
 def registration_view(request):
 
