@@ -72,10 +72,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   let register = async (x) => {
-    await fetch('/api/register/', {
+    await fetch("/api/register/", {
       method: "POST",
-      headers:  {
-        'Content-Type': 'application/json'
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: x.target.username2.value,
@@ -88,8 +88,10 @@ export const AuthProvider = ({ children }) => {
         gender: x.target.gender.value,
         address: x.target.address.value,
       }),
-    })
-  }
+    });
+  };
+
+  let [value, setValue] = useState("hello this is value");
 
   let contextData = {
     user: user,
@@ -97,6 +99,8 @@ export const AuthProvider = ({ children }) => {
     loginUser: loginUser,
     logoutUser: logoutUser,
     register: register,
+    value: value,
+    setValue: setValue,
   };
 
   useEffect(() => {

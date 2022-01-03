@@ -110,6 +110,55 @@ def updateCart(request, pk, qt):
         row = cursor.fetchall()
     return Response (row)
 
+@api_view(['GET'])
+def getShop(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT * FROM product")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def getShopTshirt(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT * FROM product where categoryid = 1")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def getShopSweater(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT * FROM product where categoryid = 2")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def getShopJeans(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT * FROM product where categoryid = 3")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def getShopShorts(request):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT * FROM product where categoryid = 4")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getItemSingle(request,pk):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT product.productid, product.productname, product.productdesc, product.price FROM product WHERE product.productid = %s",[pk])
+        row = cursor.fetchall()
+    return Response (row)
+
 @api_view(['POST',])
 def registration_view(request):
 
