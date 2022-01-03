@@ -72,7 +72,7 @@ const doped2 = {
 const Modal = ({ handleClose }) => {
   const { formOpen, close, open } = useForm();
 
-  let {loginUser,register} = useContext(AuthContext)
+  let { loginUser, register } = useContext(AuthContext);
 
   return (
     <Backdrop onClick={handleClose}>
@@ -93,25 +93,40 @@ const Modal = ({ handleClose }) => {
           animate="hidden"
           exit="exit"
         >
-          <tbody>
-            <tr>
-              <th>Email</th>
-              <td>
-                <input name="email" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Password</th>
-              <td>
+          <div className="log_in">
+            <div className="formdesign">
+              <span className="logintitle">Hello!</span>
+              <div className="field">
+                <label className="formlabel">
+                  <i className="formicon" class="fas fa-envelope-open"></i>
+                </label>
                 <input
+                  className="forminput"
+                  placeholder="Email"
+                  name="email"
+                  type="text"
+                  required
+                />
+              </div>
+
+              <div className="field">
+                <label className="formlabel">
+                  <i className="formicon" class="fas fa-lock"></i>
+                </label>
+                <input
+                  className="forminput"
+                  placeholder="Password"
                   name="password"
                   type="password"
-                  className="form-control"
+                  required
                 />
-              </td>
-            </tr>
-            <input type="submit" />
-          </tbody>
+              </div>
+
+              <div className="field">
+                <input className="forminput" type="submit" value="Login" />
+              </div>
+            </div>
+          </div>
         </motion.form>
         <motion.form
           onSubmit={register}
@@ -121,66 +136,136 @@ const Modal = ({ handleClose }) => {
           animate="hidden"
           exit="exit"
         >
-          <tbody>
-            <tr>
-              <th>Username</th>
-              <td>
-                <input name="username2" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Password</th>
-              <td>
-                <input name="password2" type="password" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Ulangi Password</th>
-              <td>
-                <input name="password22" type="password" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td>
-                <input name="email2" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>First Name</th>
-              <td>
-                <input name="first_name" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Last Name</th>
-              <td>
-                <input name="last_name" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Phone</th>
-              <td>
-                <input name="phone" type="text" className="form-control" />
-              </td>
-            </tr>
-            <tr>
-              <th>Gender</th>
-              <td>
-                <input type="radio" name="gender" value="Male" />
-                Male
-                <input type="radio" name="gender" value="Female"/>
-                Female
-              </td>
-            </tr>
-            <tr>
-              <th>Address</th>
-              <td>
-                <input name="address" type="text" className="form-control" />
-              </td>
-            </tr>
-            <input type="submit" />
-          </tbody>
+          <div className="sign_up">
+            <div className="formdesign">
+              <span className="signuptitle">Sign Up</span>
+              <div className="userdetails">
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fas fa-user"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Username"
+                    name="username2"
+                    type="text"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fas fa-lock"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Password"
+                    name="password2"
+                    type="password"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fas fa-lock"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Confirm Password"
+                    name="password22"
+                    type="password"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fas fa-envelope-open"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Email Address"
+                    name="email2"
+                    type="text"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fa fa-id-card"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="First Name"
+                    name="first_name"
+                    type="text"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="	fa fa-id-card"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Last Name"
+                    name="last_name"
+                    type="text"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fa fa-phone"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Phone Number"
+                    name="phone"
+                    type="text"
+                    required
+                  />
+                </div>
+
+                <div className="field">
+                  <label className="formlabel">
+                    <i className="formicon" class="fa fa-home"></i>
+                  </label>
+                  <input
+                    className="forminput"
+                    placeholder="Address"
+                    name="address"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="gender-details">
+                <input type="radio" name="gender" id="dot-1" value="Male" />
+                <input type="radio" name="gender" id="dot-2" value="Female" />
+                <span class="gender-title">Gender</span>
+                <div class="category">
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="field">
+                <input className="forminput" type="submit" value="Register" />
+              </div>
+            </div>
+          </div>
         </motion.form>
         <motion.button
           whileHover={{ scale: 1.3 }}
@@ -188,8 +273,9 @@ const Modal = ({ handleClose }) => {
           className="save-button2"
           onClick={() => (formOpen ? close() : open())}
         >
-        {
-      formOpen ? "login disini" : "belum daftar ?"}
+          {formOpen
+            ? "Sudah punya akun? Login disini"
+            : "Belum punya akun? Daftar disini!"}
         </motion.button>
       </motion.div>
     </Backdrop>
@@ -202,7 +288,7 @@ export default Modal;
 export const Modal2 = ({ handleClose }) => {
   const { formOpen, close, open } = useForm();
 
-  let {logoutUser} = useContext(AuthContext)
+  let { logoutUser } = useContext(AuthContext);
 
   return (
     <Backdrop onClick={handleClose}>
