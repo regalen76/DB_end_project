@@ -7,13 +7,14 @@ import useCategory from "./components/hooks/useCategory";
 
 const Items = () => {
   let [notes, setNotes] = useState([]);
-  let { authTokens, logoutUser } = useContext(AuthContext);
+  let { value, setValue, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getNotes();
   }, []);
 
   let getNotes = async () => {
+    sessionStorage.setItem("value2", null);
     let response = await fetch("/api/shops/jeans/", {
       method: "GET",
       headers: {
@@ -112,7 +113,7 @@ const Items = () => {
         </div>
         <div className="row">
           {notes.map((user) => (
-            <div className="col-md-4" key={user[0]}>
+            <div className="col-md-4" key={user[0]} data-index={user[0]}>
               <div className="card mb-4 product-wap rounded-0">
                 <div className="card rounded-0">
                   <img
@@ -121,25 +122,13 @@ const Items = () => {
                   />
                   <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                     <ul className="list-unstyled">
-                      <li>
-                        <Link
-                          to="/shop-single"
-                          className="btn btn-success text-white"
-                        >
-                          <i className="far fa-heart"></i>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/shop-single"
-                          className="btn btn-success text-white mt-2"
-                        >
-                          <i className="far fa-eye"></i>
-                        </Link>
-                      </li>
                       <Link
                         to="/shop-single"
                         className="btn btn-success text-white mt-2"
+                        onClick={() => {
+                          setValue(user[0]);
+                          sessionStorage.setItem("value2", user[0]);
+                        }}
                       >
                         <i className="fas fa-cart-plus"></i>
                       </Link>

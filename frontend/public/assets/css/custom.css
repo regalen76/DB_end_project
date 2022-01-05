@@ -211,3 +211,19 @@ Custom Css
   border: 1px solid black;
   width: 20%;
 }
+
+.clicked {
+  color: orange;
+}
+
+#btn-shop {
+  box-shadow: none;
+}
+
+#btn-minus {
+  box-shadow: none;
+}
+
+#btn-plus {
+  box-shadow: none;
+}

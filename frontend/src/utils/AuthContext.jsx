@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  let [value, setValue] = useState("hello this is value");
+  let [value, setValue] = useState("default");
 
   let contextData = {
     user: user,

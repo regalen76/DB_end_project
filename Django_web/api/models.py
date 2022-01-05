@@ -61,7 +61,7 @@ class Account(AbstractBaseUser):
         return True
 
 class Cart(models.Model):
-    cartid = models.BigIntegerField(primary_key=True)
+    cartid = models.BigAutoField(primary_key=True)
     userid = models.ForeignKey(Account, models.DO_NOTHING, db_column='userid')
     totalpayment = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
 
@@ -73,7 +73,7 @@ class Cart(models.Model):
         return self.cartid
 
 class Cartitem(models.Model):
-    cartitemid = models.BigIntegerField(primary_key=True)
+    cartitemid = models.BigAutoField(primary_key=True)
     cartid = models.ForeignKey(Cart, models.DO_NOTHING, db_column='cartid')
     sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
     quantity = models.IntegerField(blank=True, null=True)
@@ -98,7 +98,7 @@ class Category(models.Model):
         return self.categoryid
 
 class Orderitem(models.Model):
-    orderitemid = models.BigIntegerField(primary_key=True)
+    orderitemid = models.BigAutoField(primary_key=True)
     orderid = models.ForeignKey('Orderlist', models.DO_NOTHING, db_column='orderid')
     sizeid = models.ForeignKey('Productsize', models.DO_NOTHING, db_column='sizeid')
     quantity = models.IntegerField(blank=True, null=True)
@@ -111,7 +111,7 @@ class Orderitem(models.Model):
         return self.orderitemid
 
 class Orderlist(models.Model):
-    orderid = models.BigIntegerField(primary_key=True)
+    orderid = models.BigAutoField(primary_key=True)
     userid = models.ForeignKey(Account, models.DO_NOTHING, db_column='userid')
     paymentid = models.ForeignKey('Paymentdetail', models.DO_NOTHING, db_column='paymentid')
     receivername = models.CharField(max_length=150, blank=True, null=True)
@@ -129,7 +129,7 @@ class Orderlist(models.Model):
         return self.orderid
 
 class Paymentdetail(models.Model):
-    paymentid = models.BigIntegerField(primary_key=True)
+    paymentid = models.BigAutoField(primary_key=True)
     paymenttype = models.CharField(max_length=20, blank=True, null=True)
     transactiontime = models.DateTimeField(blank=True, null=True)
     paymentstatus = models.IntegerField(blank=True, null=True)
@@ -169,7 +169,7 @@ class Productsize(models.Model):
         return self.sizeid
 
 class Reviewid(models.Model):
-    reviewid = models.BigIntegerField(primary_key=True)
+    reviewid = models.BigAutoField(primary_key=True)
     productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
     orderid = models.ForeignKey(Orderlist, models.DO_NOTHING, db_column='orderid')
     rating = models.DecimalField(max_digits=18, decimal_places=0, blank=True, null=True)

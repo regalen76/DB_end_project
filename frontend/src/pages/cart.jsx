@@ -49,6 +49,9 @@ const Items = () => {
 
   let UpdateQuantityItem = async (e) => {
     let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
+    for (var i = 0; i < notes.length; i++) {
+      console.log(notes[i][2]);
+    }
     let response = await fetch(`/api/carts/${id}/${quantity.text}/update/`, {
       method: "GET",
       headers: {

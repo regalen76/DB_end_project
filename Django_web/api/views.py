@@ -22,6 +22,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
+        token['first_name'] = user.first_name
+        token['last_name'] = user.last_name
+        token['email'] = user.email
+        token['gender'] = user.gender
+        token['phone'] = user.phone
+        token['address'] = user.address
         token['password'] = user.password
         # ...
 
@@ -156,6 +162,16 @@ def getItemSingle(request,pk):
     with connection.cursor() as cursor:
         current_user = request.user
         cursor.execute("SELECT product.productid, product.productname, product.productdesc, product.price FROM product WHERE product.productid = %s",[pk])
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def addToCart(request,qt,pk,ty):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("IF EXISTS (SELECT * FROM cart WHERE userid = %s) BEGIN INSERT INTO cartitem (cartid,sizeid,quantity) SELECT cartid,sizeid, %s FROM productsize, cart WHERE productsize.productid = %s AND productsize.productsize = %s AND cart.userid = %s END ELSE BEGIN INSERT INTO cart (userid) VALUES (%s); INSERT INTO cartitem (cartid,sizeid,quantity) SELECT cartid,sizeid, %s FROM productsize, cart WHERE productsize.productid = %s AND productsize.productsize = %s AND cart.userid = %s; END",(current_user.id,qt,pk,ty,current_user.id,current_user.id,qt,pk,ty,current_user.id))
+        cursor.execute("SELECT * FROM cartitem")
         row = cursor.fetchall()
     return Response (row)
 

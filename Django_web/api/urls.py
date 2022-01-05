@@ -15,6 +15,7 @@ urlpatterns = [
     path('carts/', views.getCart, name='carts'),
     path('carts/<str:pk>/delete/', views.deleteCart, name='deletecart'),
     path('carts/<str:pk>/<str:qt>/update/', views.updateCart, name='updatecart'),
+    path('carts/<str:qt>/<str:pk>/<str:ty>/add/', views.addToCart, name='addtocart'),
     path('shops/', views.getShop, name='shops'),
     path('shops/tshirt/', views.getShopTshirt, name='shops'),
     path('shops/sweater/', views.getShopSweater, name='shops'),

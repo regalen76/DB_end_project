@@ -14,6 +14,7 @@ const Items = () => {
   }, []);
 
   let getNotes = async () => {
+    sessionStorage.setItem("value2", null);
     let response = await fetch("/api/shops/", {
       method: "GET",
       headers: {
@@ -122,7 +123,10 @@ const Items = () => {
                       <Link
                         to="/shop-single"
                         className="btn btn-success text-white mt-2"
-                        onClick={() => setValue(user[0])}
+                        onClick={() => {
+                          setValue(user[0]);
+                          sessionStorage.setItem("value2", user[0]);
+                        }}
                       >
                         <i className="fas fa-cart-plus"></i>
                       </Link>

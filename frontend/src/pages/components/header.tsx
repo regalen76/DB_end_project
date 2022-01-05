@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +12,7 @@ const Items = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
-      getNotes();
+    getNotes();
   }, []);
 
   let getNotes = async () => {
@@ -20,7 +20,7 @@ const Items = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + String(authTokens.access),
+        Authorization: "Bearer " + String(authTokens.access),
       },
     });
     let data = await response.json();
@@ -32,17 +32,13 @@ const Items = () => {
     }
   };
 
-  return (
-    <div>
-      {notes[0]}
-    </div>
-  );
+  return <div>{notes[0]}</div>;
 };
 
 export const Header = () => {
   const { modalOpen, close, open } = useModal();
-  let {user} = useContext(AuthContext)
-  let navigate = useNavigate()
+  let { user } = useContext(AuthContext);
+  let navigate = useNavigate();
 
   return (
     <div>
@@ -97,22 +93,20 @@ export const Header = () => {
             </div>
             <div className="navbar align-self-center d-flex">
               <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3"></div>
-              <p
-                className="nav-icon position-relative text-decoration-none"
-              >
-                {user && <p>Hello {user.username}</p>}
+              <p className="nav-icon position-relative text-decoration-none">
+                {user && <p>Hello {user.first_name}</p>}
               </p>
               <motion.button
                 className="nav-icon position-relative text-decoration-none save-button"
                 whileHover={{ scale: 1.3 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => {
-                  navigate("/cart")
+                  navigate("/cart");
                 }}
               >
                 <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                 <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                  <Items/>
+                  <Items />
                 </span>
               </motion.button>
               <motion.button
@@ -128,11 +122,9 @@ export const Header = () => {
                 exitBeforeEnter={true}
                 onExitComplete={() => window.location.reload()}
               >
-              {user ? (
-                modalOpen === true && <Modal2 handleClose={close} />
-              ): (
-                modalOpen === true && <Modal handleClose={close} />
-              )}
+                {user
+                  ? modalOpen === true && <Modal2 handleClose={close} />
+                  : modalOpen === true && <Modal handleClose={close} />}
               </AnimatePresence>
             </div>
           </div>
