@@ -233,6 +233,27 @@ def submit(request,bank,name,phone,address,price,quantity,prodname,prodsize):
         row = cursor.fetchall()
     return Response (row)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def submitcart(request,bank,name,phone,address,price):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        r1 = random.randint(10000000000,99999999999)
+        cursor.execute("BEGIN insert into paymentdetail (paymenttype,vanumber) values(%s,%s); insert into orderlist (userid,paymentid,receivername,receiverphone,receiveraddress,orderdate,totalpayment,orderstatus) SELECT %s,SCOPE_IDENTITY(),%s,%s,%s,%s,%s,'pending' FROM paymentdetail WHERE paymentdetail.vanumber = %s; insert into orderitem(orderid,sizeid,quantity) SELECT SCOPE_IDENTITY(),cartitem.sizeid,cartitem.quantity FROM cartitem,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid END",(bank,r1,current_user.id,name,phone,address,datetime.now(),price,r1,current_user.id))
+        cursor.execute("SELECT * FROM paymentdetail")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def deleteCart2(request):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("DELETE cartitem FROM cartitem JOIN cart ON cartitem.cartid = cart.cartid AND cart.userid = %s",[current_user.id])
+        cursor.execute("SELECT * FROM cartitem")
+        row = cursor.fetchall()
+    return Response (row)
+
 @api_view(['POST',])
 def registration_view(request):
 

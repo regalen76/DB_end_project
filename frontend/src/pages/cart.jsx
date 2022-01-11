@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Header } from "./components/header";
 import AuthContext from "../utils/AuthContext";
+import { Modal4 } from "./components/modal";
+import useModal from "./components/hooks/useModal";
 
 const Items = () => {
   let [notes, setNotes] = useState([]);
@@ -117,6 +119,8 @@ const Items = () => {
 const Totalprice = () => {
   let [notes, setNotes] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
+  let { modalOpen, close, open } = useModal();
+  let { user } = useContext(AuthContext);
 
   useEffect(() => {
     getNotes();
@@ -143,7 +147,16 @@ const Totalprice = () => {
     <div id="box-bawah">
       <div id="total-box">Total : Rp. {notes[2]}</div>
       <div>
-        <button>Buy now</button>
+        <button
+          onClick={() => {
+            modalOpen ? close() : open();
+          }}
+        >
+          Buy now
+        </button>
+        {user
+          ? modalOpen === true && <Modal4 handleClose={close} />
+          : modalOpen === true && <Modal4 handleClose={open} />}
       </div>
     </div>
   );

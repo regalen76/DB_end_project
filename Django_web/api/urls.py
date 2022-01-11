@@ -28,7 +28,8 @@ urlpatterns = [
     path('orderid/items/<str:pk>/', views.orderiditems, name='orderiditems'),
     path('pay/<str:pk>/', views.pay, name='pay'),
     path('submit/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/<str:quantity>/<str:prodname>/<str:prodsize>/', views.submit, name='submit'),
-
+    path('submitcart/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/', views.submitcart, name='submitcart'),
+    path('deletecart2/', views.deleteCart2, name='submitcart'),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
