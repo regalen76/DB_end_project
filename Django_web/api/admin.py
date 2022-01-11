@@ -26,7 +26,7 @@ class PaymentdetailAdmin(admin.ModelAdmin):
     list_display = ['paymentid','paymenttype','transactiontime','vanumber']
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['productid','categoryid','productname','productdesc','price']
+    list_display = ['productid','categoryid','productname','productdesc','price','imgurl']
 
 class ProductsizeAdmin(admin.ModelAdmin):
     list_display = ['sizeid','productid','productsize','stock']

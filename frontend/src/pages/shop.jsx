@@ -30,45 +30,6 @@ const Items = () => {
     }
   };
 
-  // let deleteCartItem = async (e) => {
-  //   let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
-  //   let response = await fetch(`/api/carts/${id}/delete/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + String(authTokens.access),
-  //     },
-  //   });
-  //   await response.json();
-
-  //   if (response.status === 200) {
-  //     window.location.reload();
-  //   } else {
-  //     logoutUser();
-  //   }
-  // };
-
-  // let UpdateQuantityItem = async (e) => {
-  //   let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
-  //   let response = await fetch(`/api/carts/${id}/${quantity.text}/update/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + String(authTokens.access),
-  //     },
-  //   });
-  //   await response.json();
-
-  //   if (response.status === 200) {
-  //     window.location.reload();
-  //   } else {
-  //     logoutUser();
-  //   }
-  // };
-
-  // let [quantity, setQuantity] = useState([]);
-  // let [showButton, setShowButton] = useState(false);
-
   return (
     <div className="row">
       <div className="col-lg-3">

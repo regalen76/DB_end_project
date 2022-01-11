@@ -147,6 +147,7 @@ class Product(models.Model):
     productname = models.CharField(max_length=50, blank=True, null=True)
     productdesc = models.CharField(max_length=300, blank=True, null=True)
     price = models.DecimalField(max_digits=11, decimal_places=2, blank=True, null=True)
+    imgurl = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False

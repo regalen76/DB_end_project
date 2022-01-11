@@ -43,51 +43,12 @@ export class Home extends React.Component {
                   <div className="col-lg-6 mb-0 d-flex align-items-center">
                     <div className="text-align-left align-self-center">
                       <h1 className="h1 text-success">
-                        <b>Zay</b> eCommerce
+                        <b>Keken</b> Empire
                       </h1>
-                      <h3 className="h2">
-                        Tiny and Perfect eCommerce Template
-                      </h3>
+                      <h3 className="h2">Clothing Company</h3>
                       <p>
-                        Zay Shop is an eCommerce HTML5 CSS template with latest
-                        version of Bootstrap 5 (beta 1). This template is 100%
-                        free provided by{" "}
-                        <a
-                          rel="sponsored"
-                          className="text-success"
-                          href="https://templatemo.com"
-                          target="_blank"
-                        >
-                          TemplateMo
-                        </a>{" "}
-                        website. Image credits go to{" "}
-                        <a
-                          rel="sponsored"
-                          className="text-success"
-                          href="https://stories.freepik.com/"
-                          target="_blank"
-                        >
-                          Freepik Stories
-                        </a>
-                        ,
-                        <a
-                          rel="sponsored"
-                          className="text-success"
-                          href="https://unsplash.com/"
-                          target="_blank"
-                        >
-                          Unsplash
-                        </a>{" "}
-                        and
-                        <a
-                          rel="sponsored"
-                          className="text-success"
-                          href="https://icons8.com/"
-                          target="_blank"
-                        >
-                          Icons 8
-                        </a>
-                        .
+                        Keken Empire is an eCommerce Website made by KekenFamily
+                        in order to fulfill database system final project.
                       </p>
                     </div>
                   </div>
@@ -106,15 +67,9 @@ export class Home extends React.Component {
                   </div>
                   <div className="col-lg-6 mb-0 d-flex align-items-center">
                     <div className="text-align-left">
-                      <h1 className="h1">Proident occaecat</h1>
-                      <h3 className="h2">Aliquip ex ea commodo consequat</h3>
-                      <p>
-                        You are permitted to use this Zay CSS template for your
-                        commercial websites. You are{" "}
-                        <strong>not permitted</strong> to re-distribute the
-                        template ZIP file in any kind of template collection
-                        websites.
-                      </p>
+                      <h1 className="h1">Finest Quality</h1>
+                      <h3 className="h2">100% Made In Indonesia</h3>
+                      <p>Handcrafted and designed by Local Artist</p>
                     </div>
                   </div>
                 </div>
@@ -132,14 +87,9 @@ export class Home extends React.Component {
                   </div>
                   <div className="col-lg-6 mb-0 d-flex align-items-center">
                     <div className="text-align-left">
-                      <h1 className="h1">Repr in voluptate</h1>
-                      <h3 className="h2">Ullamco laboris nisi ut </h3>
-                      <p>
-                        We bring you 100% free CSS templates for your websites.
-                        If you wish to support TemplateMo, please make a small
-                        contribution via PayPal or tell your friends about our
-                        website. Thank you.
-                      </p>
+                      <h1 className="h1">Worldwide Shipping</h1>
+                      <h3 className="h2">100% free and worldwide shipping</h3>
+                      <p>Online live Support directly with the developer.</p>
                     </div>
                   </div>
                 </div>
@@ -167,11 +117,8 @@ export class Home extends React.Component {
         <section className="container py-5">
           <div className="row text-center pt-3">
             <div className="col-lg-6 m-auto">
-              <h1 className="h1">Categories of The Month</h1>
-              <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-              </p>
+              <h1 className="h1">Categories</h1>
+              <p>Keken Empire Featured Categories</p>
             </div>
           </div>
           <div className="row">
@@ -182,7 +129,7 @@ export class Home extends React.Component {
                   className="rounded-circle img-fluid border"
                 />
               </a>
-              <h5 className="text-center mt-3 mb-3">Watches</h5>
+              <h5 className="text-center mt-3 mb-3">T-Shirt</h5>
               <p className="text-center">
                 <a className="btn btn-success">Go Shop</a>
               </p>
@@ -194,7 +141,7 @@ export class Home extends React.Component {
                   className="rounded-circle img-fluid border"
                 />
               </a>
-              <h2 className="h5 text-center mt-3 mb-3">Shoes</h2>
+              <h2 className="h5 text-center mt-3 mb-3">Sweater</h2>
               <p className="text-center">
                 <a className="btn btn-success">Go Shop</a>
               </p>
@@ -206,7 +153,7 @@ export class Home extends React.Component {
                   className="rounded-circle img-fluid border"
                 />
               </a>
-              <h2 className="h5 text-center mt-3 mb-3">Accessories</h2>
+              <h2 className="h5 text-center mt-3 mb-3">Shorts</h2>
               <p className="text-center">
                 <a className="btn btn-success">Go Shop</a>
               </p>
@@ -219,11 +166,7 @@ export class Home extends React.Component {
             <div className="row text-center py-3">
               <div className="col-lg-6 m-auto">
                 <h1 className="h1">Featured Product</h1>
-                <p>
-                  Reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                  nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident.
-                </p>
+                <p>Keken Empire Best Selling Items</p>
               </div>
             </div>
             <div className="row">
@@ -242,22 +185,21 @@ export class Home extends React.Component {
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
-                        <i className="text-muted fa fa-star"></i>
+                        <i className="text-warning fa fa-star"></i>
                         <i className="text-muted fa fa-star"></i>
                       </li>
-                      <li className="text-muted text-right">$240.00</li>
+                      <li className="text-muted text-right">Rp. 350.000 </li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
                     >
-                      Gym Weight
+                      Chino
                     </Link>
                     <p className="card-text">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Sunt in culpa qui officia deserunt.
+                      Made from strech of cotton, best to wear at summer
                     </p>
-                    <p className="text-muted">Reviews (24)</p>
+                    <p className="text-muted">Reviews (124)</p>
                   </div>
                 </div>
               </div>
@@ -266,7 +208,7 @@ export class Home extends React.Component {
                   <Link to="/shop-single">
                     <img
                       src="./static/img/feature_prod_02.jpg"
-                      className="card-img-top"
+                      className="card-img-top prod2"
                       alt="..."
                     />
                   </Link>
@@ -276,22 +218,22 @@ export class Home extends React.Component {
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
-                        <i className="text-muted fa fa-star"></i>
+                        <i className="text-warning fa fa-star"></i>
                         <i className="text-muted fa fa-star"></i>
                       </li>
-                      <li className="text-muted text-right">$480.00</li>
+                      <li className="text-muted text-right">Rp. 599.000</li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
                     >
-                      Cloud Nike Shoes
+                      Chernobyl
                     </Link>
                     <p className="card-text">
-                      Aenean gravida dignissim finibus. Nullam ipsum diam,
-                      posuere vitae pharetra sed, commodo ullamcorper.
+                      Basen on real life event that occurred on 26 April 1986,
+                      Pripyat.
                     </p>
-                    <p className="text-muted">Reviews (48)</p>
+                    <p className="text-muted">Reviews (1048)</p>
                   </div>
                 </div>
               </div>
@@ -313,19 +255,16 @@ export class Home extends React.Component {
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
                       </li>
-                      <li className="text-muted text-right">$360.00</li>
+                      <li className="text-muted text-right">Rp. 399.000</li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
                     >
-                      Summer Addides Shoes
+                      Muse
                     </Link>
-                    <p className="card-text">
-                      Curabitur ac mi sit amet diam luctus porta. Phasellus
-                      pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
-                    </p>
-                    <p className="text-muted">Reviews (74)</p>
+                    <p className="card-text">"For you my Muse"</p>
+                    <p className="text-muted">Reviews (2074)</p>
                   </div>
                 </div>
               </div>
@@ -335,111 +274,6 @@ export class Home extends React.Component {
 
         <footer className="bg-dark" id="tempaltemo_footer">
           <div className="container">
-            <div className="row">
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-success border-bottom pb-3 border-light logo">
-                  Zay Shop
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <i className="fas fa-map-marker-alt fa-fw"></i>
-                    123 Consectetur at ligula 10660
-                  </li>
-                  <li>
-                    <i className="fa fa-phone fa-fw"></i>
-                    <a className="text-decoration-none" href="tel:010-020-0340">
-                      010-020-0340
-                    </a>
-                  </li>
-                  <li>
-                    <i className="fa fa-envelope fa-fw"></i>
-                    <a
-                      className="text-decoration-none"
-                      href="mailto:info@company.com"
-                    >
-                      info@company.com
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Products
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Luxury
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Wear
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Men's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Women's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Popular Dress
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Gym Accessories
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Shoes
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Further Info
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Shop Locations
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      FAQs
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
             <div className="row text-light mb-4">
               <div className="col-12 mb-3">
                 <div className="w-100 my-3 border-top border-light"></div>

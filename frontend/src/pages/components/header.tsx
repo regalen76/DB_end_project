@@ -76,7 +76,7 @@ export const Header = () => {
             to="/"
             className="navbar-brand text-success logo h1 align-self-center"
           >
-            Zay
+            Keken Empire
           </Link>
 
           <button
@@ -110,11 +110,6 @@ export const Header = () => {
                 <li className="nav-item">
                   <Link to="/shop" className="nav-link">
                     Shop
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/contact" className="nav-link">
-                    Contact
                   </Link>
                 </li>
               </ul>
