@@ -4,10 +4,14 @@ import Contact from "./pages/contact";
 import Shopsingle from "./pages/shop-single";
 import Shop from "./pages/shop";
 import Cart from "./pages/cart";
+import Order from "./pages/order";
+import Orderid from "./pages/orderid";
 import Shop2 from "./pages/shop-tshirt";
 import Shop3 from "./pages/shop-sweater";
 import Shop4 from "./pages/shop-jeans";
 import Shop5 from "./pages/shop-shorts";
+import Mock from "./pages/mockpaymentbca";
+import Mock2 from "./pages/mockpaymentbni";
 import "./App.css";
 import {
   BrowserRouter,
@@ -45,7 +49,17 @@ function App() {
           <Route path="/shop-sweater" element={<Shop3 />} />
           <Route path="/shop-jeans" element={<Shop4 />} />
           <Route path="/shop-shorts" element={<Shop5 />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<PrivateOutlet />}>
+            <Route path="" element={<Cart />} />
+          </Route>
+          <Route path="/order" element={<PrivateOutlet />}>
+            <Route path="" element={<Order />} />
+          </Route>
+          <Route path="/orderid" element={<PrivateOutlet />}>
+            <Route path="" element={<Orderid />} />
+          </Route>
+          <Route path="/mockpaymentbca" element={<Mock />} />
+          <Route path="/mockpaymentbni" element={<Mock2 />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

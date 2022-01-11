@@ -1,6 +1,6 @@
 from django.contrib import admin
 from rest_framework import serializers
-from .models import Account,Cart,Cartitem,Category,Orderitem,Orderlist,Paymentdetail,Product,Productsize,Reviewid
+from .models import Account,Cart,Cartitem,Category,Orderitem,Orderlist,Paymentdetail,Product,Productsize
 
 # Register your models here.
 
@@ -23,16 +23,13 @@ class OrderlistAdmin(admin.ModelAdmin):
     list_display = ['orderid','userid','paymentid','receivername','receiverphone','receiveraddress','orderdate','totalpayment','orderstatus']
 
 class PaymentdetailAdmin(admin.ModelAdmin):
-    list_display = ['paymentid','paymenttype','transactiontime','paymentstatus']
+    list_display = ['paymentid','paymenttype','transactiontime','vanumber']
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['productid','categoryid','productname','productdesc','price']
 
 class ProductsizeAdmin(admin.ModelAdmin):
     list_display = ['sizeid','productid','productsize','stock']
-
-class ReviewidAdmin(admin.ModelAdmin):
-    list_display = ['reviewid','productid','orderid','rating','note']
 
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Cart, CartAdmin)
@@ -43,4 +40,3 @@ admin.site.register(Orderlist,OrderlistAdmin)
 admin.site.register(Paymentdetail,PaymentdetailAdmin)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Productsize,ProductsizeAdmin)
-admin.site.register(Reviewid,ReviewidAdmin)

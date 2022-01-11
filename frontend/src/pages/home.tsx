@@ -36,7 +36,7 @@ export class Home extends React.Component {
                   <div className="mx-auto col-md-8 col-lg-6 order-lg-last">
                     <img
                       className="img-fluid"
-                      src="./assets/img/banner_img_01.jpg"
+                      src="./static/img/banner_img_01.jpg"
                       alt=""
                     />
                   </div>
@@ -100,7 +100,7 @@ export class Home extends React.Component {
                   <div className="mx-auto col-md-8 col-lg-6 order-lg-last">
                     <img
                       className="img-fluid"
-                      src="./assets/img/banner_img_02.jpg"
+                      src="./static/img/banner_img_02.jpg"
                       alt=""
                     />
                   </div>
@@ -126,7 +126,7 @@ export class Home extends React.Component {
                   <div className="mx-auto col-md-8 col-lg-6 order-lg-last">
                     <img
                       className="img-fluid"
-                      src="./assets/img/banner_img_03.jpg"
+                      src="./static/img/banner_img_03.jpg"
                       alt=""
                     />
                   </div>
@@ -178,7 +178,7 @@ export class Home extends React.Component {
             <div className="col-12 col-md-4 p-5 mt-3">
               <a href="#">
                 <img
-                  src="./assets/img/category_img_01.jpg"
+                  src="./static/img/category_img_01.jpg"
                   className="rounded-circle img-fluid border"
                 />
               </a>
@@ -190,7 +190,7 @@ export class Home extends React.Component {
             <div className="col-12 col-md-4 p-5 mt-3">
               <a href="#">
                 <img
-                  src="./assets/img/category_img_02.jpg"
+                  src="./static/img/category_img_02.jpg"
                   className="rounded-circle img-fluid border"
                 />
               </a>
@@ -202,7 +202,7 @@ export class Home extends React.Component {
             <div className="col-12 col-md-4 p-5 mt-3">
               <a href="#">
                 <img
-                  src="./assets/img/category_img_03.jpg"
+                  src="./static/img/category_img_03.jpg"
                   className="rounded-circle img-fluid border"
                 />
               </a>
@@ -231,7 +231,7 @@ export class Home extends React.Component {
                 <div className="card h-100">
                   <Link to="/shop-single">
                     <img
-                      src="./assets/img/feature_prod_01.jpg"
+                      src="./static/img/feature_prod_01.jpg"
                       className="card-img-top"
                       alt="..."
                     />
@@ -265,7 +265,7 @@ export class Home extends React.Component {
                 <div className="card h-100">
                   <Link to="/shop-single">
                     <img
-                      src="./assets/img/feature_prod_02.jpg"
+                      src="./static/img/feature_prod_02.jpg"
                       className="card-img-top"
                       alt="..."
                     />
@@ -299,7 +299,7 @@ export class Home extends React.Component {
                 <div className="card h-100">
                   <Link to="/shop-single">
                     <img
-                      src="./assets/img/feature_prod_03.jpg"
+                      src="./static/img/feature_prod_03.jpg"
                       className="card-img-top"
                       alt="..."
                     />
@@ -523,11 +523,11 @@ export class Home extends React.Component {
           </div>
         </footer>
         <Helmet>
-          <script src="assets/js/jquery-1.11.0.min.js"></script>
-          <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-          <script src="assets/js/bootstrap.bundle.min.js"></script>
-          <script src="assets/js/templatemo.js"></script>
-          <script src="assets/js/custom.js"></script>
+          <script src="static/js/jquery-1.11.0.min.js"></script>
+          <script src="static/js/jquery-migrate-1.2.1.min.js"></script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+          <script src="static/js/templatemo.js"></script>
+          <script src="static/js/custom.js"></script>
         </Helmet>
       </div>
     );

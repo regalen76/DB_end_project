@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
-import { Navigate } from "react-router-dom";
 import { Header } from "./components/header";
 import AuthContext from "../utils/AuthContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Modal3 } from "./components/modal";
+import useModal from "./components/hooks/useModal";
 
 const Itemsingle = () => {
   let [notes, setNotes] = useState([]);
@@ -15,6 +16,8 @@ const Itemsingle = () => {
   let [sizeNow, setSizeNow] = useState("null");
 
   let [quantity, setQuantity] = useState(1);
+
+  let { modalOpen, close, open } = useModal();
 
   let decrementQuantity = () => {
     if (quantity > 1) {
@@ -79,7 +82,7 @@ const Itemsingle = () => {
             <div className="card mb-3">
               <img
                 className="card-img img-fluid"
-                src={`assets/img/shop_0${user[0]}.jpg`}
+                src={`static/img/shop_0${user[0]}.jpg`}
                 alt="Card image cap"
                 id="product-detail"
               />
@@ -111,7 +114,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_01.jpg"
+                            src="static/img/product_single_01.jpg"
                             alt="Product Image 1"
                           />
                         </a>
@@ -120,7 +123,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_02.jpg"
+                            src="static/img/product_single_02.jpg"
                             alt="Product Image 2"
                           />
                         </a>
@@ -129,7 +132,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_03.jpg"
+                            src="static/img/product_single_03.jpg"
                             alt="Product Image 3"
                           />
                         </a>
@@ -143,7 +146,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_04.jpg"
+                            src="static/img/product_single_04.jpg"
                             alt="Product Image 4"
                           />
                         </a>
@@ -152,7 +155,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_05.jpg"
+                            src="static/img/product_single_05.jpg"
                             alt="Product Image 5"
                           />
                         </a>
@@ -161,7 +164,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_06.jpg"
+                            src="static/img/product_single_06.jpg"
                             alt="Product Image 6"
                           />
                         </a>
@@ -175,7 +178,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_07.jpg"
+                            src="static/img/product_single_07.jpg"
                             alt="Product Image 7"
                           />
                         </a>
@@ -184,7 +187,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_08.jpg"
+                            src="static/img/product_single_08.jpg"
                             alt="Product Image 8"
                           />
                         </a>
@@ -193,7 +196,7 @@ const Itemsingle = () => {
                         <a href="#">
                           <img
                             className="card-img img-fluid"
-                            src="assets/img/product_single_09.jpg"
+                            src="static/img/product_single_09.jpg"
                             alt="Product Image 9"
                           />
                         </a>
@@ -395,11 +398,18 @@ const Itemsingle = () => {
                         if (sizeNow === "null") {
                           alert("choose size first");
                         } else {
+                          sessionStorage.setItem("valuex", quantity);
+                          sessionStorage.setItem("valuez", sizeNow);
+                          modalOpen ? close() : open();
                         }
                       }}
                     >
                       Buy
                     </button>
+
+                    {user
+                      ? modalOpen === true && <Modal3 handleClose={close} />
+                      : modalOpen === true && <Modal3 handleClose={open} />}
                   </div>
                   <div className="col d-grid">
                     <button
@@ -623,13 +633,13 @@ export class Home extends React.Component {
           </div>
         </footer>
         <Helmet>
-          <script src="assets/js/jquery-1.11.0.min.js"></script>
-          <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-          <script src="assets/js/bootstrap.bundle.min.js"></script>
-          <script src="assets/js/templatemo.js"></script>
-          <script src="assets/js/custom.js"></script>
-          <script src="assets/js/slick.min.js"></script>
-          <script src="assets/js/test.js"></script>
+          <script src="static/js/jquery-1.11.0.min.js"></script>
+          <script src="static/js/jquery-migrate-1.2.1.min.js"></script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+          <script src="static/js/templatemo.js"></script>
+          <script src="static/js/custom.js"></script>
+          <script src="static/js/slick.min.js"></script>
+          <script src="static/js/test.js"></script>
         </Helmet>
       </div>
     );

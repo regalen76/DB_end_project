@@ -22,6 +22,12 @@ urlpatterns = [
     path('shops/jeans/', views.getShopJeans, name='shops'),
     path('shops/shorts/', views.getShopShorts, name='shops'),
     path('items/<str:pk>/single/', views.getItemSingle, name='item_single'),
+    path('order/', views.order, name='order'),
+    path('ordercount/', views.ordercount, name='ordercount'),
+    path('orderid/<str:pk>/', views.orderid, name='orderid'),
+    path('orderid/items/<str:pk>/', views.orderiditems, name='orderiditems'),
+    path('pay/<str:pk>/', views.pay, name='pay'),
+    path('submit/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/<str:quantity>/<str:prodname>/<str:prodsize>/', views.submit, name='submit'),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

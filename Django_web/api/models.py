@@ -132,7 +132,7 @@ class Paymentdetail(models.Model):
     paymentid = models.BigAutoField(primary_key=True)
     paymenttype = models.CharField(max_length=20, blank=True, null=True)
     transactiontime = models.DateTimeField(blank=True, null=True)
-    paymentstatus = models.IntegerField(blank=True, null=True)
+    vanumber = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -167,17 +167,3 @@ class Productsize(models.Model):
 
     def __int__(self):
         return self.sizeid
-
-class Reviewid(models.Model):
-    reviewid = models.BigAutoField(primary_key=True)
-    productid = models.ForeignKey(Product, models.DO_NOTHING, db_column='productid')
-    orderid = models.ForeignKey(Orderlist, models.DO_NOTHING, db_column='orderid')
-    rating = models.DecimalField(max_digits=18, decimal_places=0, blank=True, null=True)
-    note = models.CharField(max_length=500, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'reviewid'
-
-    def __int__(self):
-        return self.reviewid

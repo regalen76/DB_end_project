@@ -21,7 +21,7 @@ export class Home extends React.Component {
                 </p>
               </div>
               <div className="col-md-4">
-                <img src="assets/img/about-hero.svg" alt="About Hero" />
+                <img src="static/img/about-hero.svg" alt="About Hero" />
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
+                                  src="static/img/brand_01.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -124,7 +124,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
+                                  src="static/img/brand_02.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -133,7 +133,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
+                                  src="static/img/brand_03.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -142,48 +142,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
-                                  alt="Brand Logo"
-                                />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="carousel-item">
-                          <div className="row">
-                            <div className="col-3 p-md-5">
-                              <a href="#">
-                                <img
-                                  className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
-                                  alt="Brand Logo"
-                                />
-                              </a>
-                            </div>
-                            <div className="col-3 p-md-5">
-                              <a href="#">
-                                <img
-                                  className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
-                                  alt="Brand Logo"
-                                />
-                              </a>
-                            </div>
-                            <div className="col-3 p-md-5">
-                              <a href="#">
-                                <img
-                                  className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
-                                  alt="Brand Logo"
-                                />
-                              </a>
-                            </div>
-                            <div className="col-3 p-md-5">
-                              <a href="#">
-                                <img
-                                  className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
+                                  src="static/img/brand_04.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -197,7 +156,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
+                                  src="static/img/brand_01.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -206,7 +165,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
+                                  src="static/img/brand_02.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -215,7 +174,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
+                                  src="static/img/brand_03.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -224,7 +183,48 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
+                                  src="static/img/brand_04.png"
+                                  alt="Brand Logo"
+                                />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="carousel-item">
+                          <div className="row">
+                            <div className="col-3 p-md-5">
+                              <a href="#">
+                                <img
+                                  className="img-fluid brand-img"
+                                  src="static/img/brand_01.png"
+                                  alt="Brand Logo"
+                                />
+                              </a>
+                            </div>
+                            <div className="col-3 p-md-5">
+                              <a href="#">
+                                <img
+                                  className="img-fluid brand-img"
+                                  src="static/img/brand_02.png"
+                                  alt="Brand Logo"
+                                />
+                              </a>
+                            </div>
+                            <div className="col-3 p-md-5">
+                              <a href="#">
+                                <img
+                                  className="img-fluid brand-img"
+                                  src="static/img/brand_03.png"
+                                  alt="Brand Logo"
+                                />
+                              </a>
+                            </div>
+                            <div className="col-3 p-md-5">
+                              <a href="#">
+                                <img
+                                  className="img-fluid brand-img"
+                                  src="static/img/brand_04.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -441,11 +441,11 @@ export class Home extends React.Component {
           </div>
         </footer>
         <Helmet>
-          <script src="assets/js/jquery-1.11.0.min.js"></script>
-          <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-          <script src="assets/js/bootstrap.bundle.min.js"></script>
-          <script src="assets/js/templatemo.js"></script>
-          <script src="assets/js/custom.js"></script>
+          <script src="static/js/jquery-1.11.0.min.js"></script>
+          <script src="static/js/jquery-migrate-1.2.1.min.js"></script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+          <script src="static/js/templatemo.js"></script>
+          <script src="static/js/custom.js"></script>
         </Helmet>
       </div>
     );

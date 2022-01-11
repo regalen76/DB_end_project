@@ -118,7 +118,7 @@ const Items = () => {
                 <div className="card rounded-0">
                   <img
                     className="card-img rounded-0 img-fluid"
-                    src={`assets/img/shop_0${user[0]}.jpg`}
+                    src={`static/img/shop_0${user[0]}.jpg`}
                   />
                   <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                     <ul className="list-unstyled">
@@ -217,7 +217,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
+                                  src="static/img/brand_01.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -226,7 +226,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
+                                  src="static/img/brand_02.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -235,7 +235,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
+                                  src="static/img/brand_03.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -244,7 +244,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
+                                  src="static/img/brand_04.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -258,7 +258,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
+                                  src="static/img/brand_01.png"
                                   alt="Brand Logo/"
                                 />
                               </a>
@@ -267,7 +267,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
+                                  src="static/img/brand_02.png"
                                   alt="Brand Logo/"
                                 />
                               </a>
@@ -276,7 +276,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
+                                  src="static/img/brand_03.png"
                                   alt="Brand Logo/"
                                 />
                               </a>
@@ -285,7 +285,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
+                                  src="static/img/brand_04.png"
                                   alt="Brand Logo/"
                                 />
                               </a>
@@ -299,7 +299,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_01.png"
+                                  src="static/img/brand_01.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -308,7 +308,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_02.png"
+                                  src="static/img/brand_02.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -317,7 +317,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_03.png"
+                                  src="static/img/brand_03.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -326,7 +326,7 @@ export class Home extends React.Component {
                               <a href="#">
                                 <img
                                   className="img-fluid brand-img"
-                                  src="assets/img/brand_04.png"
+                                  src="static/img/brand_04.png"
                                   alt="Brand Logo"
                                 />
                               </a>
@@ -543,11 +543,11 @@ export class Home extends React.Component {
           </div>
         </footer>
         <Helmet>
-          <script src="assets/js/jquery-1.11.0.min.js"></script>
-          <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-          <script src="assets/js/bootstrap.bundle.min.js"></script>
-          <script src="assets/js/templatemo.js"></script>
-          <script src="assets/js/custom.js"></script>
+          <script src="static/js/jquery-1.11.0.min.js"></script>
+          <script src="static/js/jquery-migrate-1.2.1.min.js"></script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+          <script src="static/js/templatemo.js"></script>
+          <script src="static/js/custom.js"></script>
         </Helmet>
       </div>
     );

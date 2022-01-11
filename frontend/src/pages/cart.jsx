@@ -30,7 +30,10 @@ const Items = () => {
   };
 
   let deleteCartItem = async (e) => {
-    let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
+    let id =
+      e.currentTarget.parentNode.parentNode.parentNode.getAttribute(
+        "data-index"
+      );
     let response = await fetch(`/api/carts/${id}/delete/`, {
       method: "GET",
       headers: {
@@ -48,10 +51,10 @@ const Items = () => {
   };
 
   let UpdateQuantityItem = async (e) => {
-    let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
-    for (var i = 0; i < notes.length; i++) {
-      console.log(notes[i][2]);
-    }
+    let id =
+      e.currentTarget.parentNode.parentNode.parentNode.getAttribute(
+        "data-index"
+      );
     let response = await fetch(`/api/carts/${id}/${quantity.text}/update/`, {
       method: "GET",
       headers: {
@@ -74,12 +77,12 @@ const Items = () => {
   return (
     <div>
       {notes.map((user) => (
-        <table className="table-bawah" data-index={user[5]} key={user[5]}>
+        <table id="table-bawah" data-index={user[5]} key={user[5]}>
           <tr>
             <td>
               {user[0]} {user[1]}
             </td>
-            <td>
+            <td className="quantity-box">
               <input
                 type="number"
                 defaultValue={user[2]}
@@ -90,12 +93,20 @@ const Items = () => {
                 }}
               ></input>
             </td>
-            <td>{user[3]}</td>
-            <td>{user[4]}</td>
-            <button onClick={deleteCartItem}>DELETE</button>
-            {showButton ? (
-              <button onClick={UpdateQuantityItem}>SAVE</button>
-            ) : null}
+            <td>Rp. {user[3]}</td>
+            <td>Rp. {user[4]}</td>
+
+            <td id="cartbutton">
+              <button className="cartdelete" onClick={deleteCartItem}>
+                <i class="fa fa-trash"></i>
+              </button>
+
+              {showButton ? (
+                <button className="cartsave" onClick={UpdateQuantityItem}>
+                  <i class="fa fa-save"></i>
+                </button>
+              ) : null}
+            </td>
           </tr>
         </table>
       ))}
@@ -128,7 +139,14 @@ const Totalprice = () => {
     }
   };
 
-  return <div>Total : {notes[2]}</div>;
+  return (
+    <div id="box-bawah">
+      <div id="total-box">Total : Rp. {notes[2]}</div>
+      <div>
+        <button>Buy now</button>
+      </div>
+    </div>
+  );
 };
 
 export class Home extends React.Component {
@@ -140,10 +158,6 @@ export class Home extends React.Component {
           <div className="row text-center pt-5 pb-3">
             <div className="col-lg-6 m-auto">
               <h1 className="h1">CART</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod Lorem ipsum dolor sit amet.
-              </p>
             </div>
           </div>
 
@@ -352,11 +366,11 @@ export class Home extends React.Component {
           </div>
         </footer>
         <Helmet>
-          <script src="assets/js/jquery-1.11.0.min.js"></script>
-          <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-          <script src="assets/js/bootstrap.bundle.min.js"></script>
-          <script src="assets/js/templatemo.js"></script>
-          <script src="assets/js/custom.js"></script>
+          <script src="static/js/jquery-1.11.0.min.js"></script>
+          <script src="static/js/jquery-migrate-1.2.1.min.js"></script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+          <script src="static/js/templatemo.js"></script>
+          <script src="static/js/custom.js"></script>
         </Helmet>
       </div>
     );

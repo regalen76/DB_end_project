@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   let register = async (x) => {
-    await fetch("/api/register/", {
+    let response = await fetch("/api/register/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,6 +89,13 @@ export const AuthProvider = ({ children }) => {
         address: x.target.address.value,
       }),
     });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      alert("Register success");
+    } else {
+      alert("Register failed");
+    }
   };
 
   let [value, setValue] = useState("default");

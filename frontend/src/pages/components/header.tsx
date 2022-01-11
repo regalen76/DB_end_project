@@ -35,6 +35,34 @@ const Items = () => {
   return <div>{notes[0]}</div>;
 };
 
+const Items2 = () => {
+  let [notes, setNotes] = useState([]);
+  let { authTokens, logoutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    getNotes();
+  }, []);
+
+  let getNotes = async () => {
+    let response = await fetch("/api/ordercount/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      setNotes(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+
+  return <div>{notes[0]}</div>;
+};
+
 export const Header = () => {
   const { modalOpen, close, open } = useModal();
   let { user } = useContext(AuthContext);
@@ -93,9 +121,19 @@ export const Header = () => {
             </div>
             <div className="navbar align-self-center d-flex">
               <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3"></div>
-              <p className="nav-icon position-relative text-decoration-none">
-                {user && <p>Hello {user.first_name}</p>}
-              </p>
+              <motion.button
+                className="nav-icon position-relative text-decoration-none save-button"
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  navigate("/order");
+                }}
+              >
+                <i className="fa fa-fw fas fa-bell text-dark mr-1"></i>
+                <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+                  <Items2 />
+                </span>
+              </motion.button>
               <motion.button
                 className="nav-icon position-relative text-decoration-none save-button"
                 whileHover={{ scale: 1.3 }}

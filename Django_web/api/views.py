@@ -12,6 +12,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Account,Cart,Cartitem
 from .serializers import RegistrationSerializer,AccountSerializer,PriceSerializer
+import random
+from datetime import datetime
 
 # Create your views here.
 
@@ -172,6 +174,62 @@ def addToCart(request,qt,pk,ty):
         current_user = request.user
         cursor.execute("IF EXISTS (SELECT * FROM cart WHERE userid = %s) BEGIN INSERT INTO cartitem (cartid,sizeid,quantity) SELECT cartid,sizeid, %s FROM productsize, cart WHERE productsize.productid = %s AND productsize.productsize = %s AND cart.userid = %s END ELSE BEGIN INSERT INTO cart (userid) VALUES (%s); INSERT INTO cartitem (cartid,sizeid,quantity) SELECT cartid,sizeid, %s FROM productsize, cart WHERE productsize.productid = %s AND productsize.productsize = %s AND cart.userid = %s; END",(current_user.id,qt,pk,ty,current_user.id,current_user.id,qt,pk,ty,current_user.id))
         cursor.execute("SELECT * FROM cartitem")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def order(request):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("SELECT orderid, orderstatus FROM orderlist WHERE userid = %s",[current_user.id])
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def ordercount(request):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("SELECT COUNT(orderlist.orderid) FROM orderlist WHERE userid = %s AND orderstatus = 'pending'",[current_user.id])
+        row = cursor.fetchall()
+    return Response (row)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def orderid(request,pk):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("SELECT orderlist.orderid,orderlist.receivername,orderlist.receiverphone,orderlist.receiveraddress,orderlist.orderdate,orderlist.totalpayment,paymentdetail.paymenttype,paymentdetail.vanumber,orderlist.orderstatus FROM orderlist JOIN paymentdetail ON orderlist.paymentid = paymentdetail.paymentid where orderlist.orderid = %s",[pk])
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def orderiditems(request,pk):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("SELECT product.productname, productsize.productsize, product.price, orderitem.quantity FROM orderitem JOIN productsize ON orderitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid WHERE orderitem.orderid = %s",[pk])
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def pay(request,pk):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("UPDATE orderlist SET orderstatus = 'paid' FROM orderlist JOIN paymentdetail ON orderlist.paymentid = paymentdetail.paymentid WHERE paymentdetail.vanumber = %s",[pk])
+        cursor.execute("SELECT * FROM orderlist")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def submit(request,bank,name,phone,address,price,quantity,prodname,prodsize):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        r1 = random.randint(10000000000,99999999999)
+        cursor.execute("BEGIN insert into paymentdetail (paymenttype,vanumber) values(%s,%s); insert into orderlist (userid,paymentid,receivername,receiverphone,receiveraddress,orderdate,totalpayment,orderstatus) SELECT %s,SCOPE_IDENTITY(),%s,%s,%s,%s,%s,'pending' FROM paymentdetail WHERE paymentdetail.vanumber = %s; insert into orderitem(orderid,sizeid,quantity) SELECT SCOPE_IDENTITY(),productsize.sizeid,%s from productsize JOIN product ON productsize.productid = product.productid WHERE product.productname=%s AND productsize.productsize = %s END",(bank,r1,current_user.id,name,phone,address,datetime.now(),price,r1,quantity,prodname,prodsize))
+        cursor.execute("SELECT * FROM paymentdetail")
         row = cursor.fetchall()
     return Response (row)
 
