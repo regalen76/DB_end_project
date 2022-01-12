@@ -131,7 +131,9 @@ export class Home extends React.Component {
               </a>
               <h5 className="text-center mt-3 mb-3">T-Shirt</h5>
               <p className="text-center">
-                <a className="btn btn-success">Go Shop</a>
+                <Link to="/shop-tshirt" className="btn btn-success">
+                  Go Shop
+                </Link>
               </p>
             </div>
             <div className="col-12 col-md-4 p-5 mt-3">
@@ -143,7 +145,9 @@ export class Home extends React.Component {
               </a>
               <h2 className="h5 text-center mt-3 mb-3">Sweater</h2>
               <p className="text-center">
-                <a className="btn btn-success">Go Shop</a>
+                <Link to="/shop-sweater" className="btn btn-success">
+                  Go Shop
+                </Link>
               </p>
             </div>
             <div className="col-12 col-md-4 p-5 mt-3">
@@ -155,7 +159,9 @@ export class Home extends React.Component {
               </a>
               <h2 className="h5 text-center mt-3 mb-3">Shorts</h2>
               <p className="text-center">
-                <a className="btn btn-success">Go Shop</a>
+                <Link to="/shop-shorts" className="btn btn-success">
+                  Go Shop
+                </Link>
               </p>
             </div>
           </div>
@@ -172,7 +178,12 @@ export class Home extends React.Component {
             <div className="row">
               <div className="col-12 col-md-4 mb-4">
                 <div className="card h-100">
-                  <Link to="/shop-single">
+                  <Link
+                    to="/shop-single"
+                    onClick={() => {
+                      sessionStorage.setItem("value2", "20");
+                    }}
+                  >
                     <img
                       src="./static/img/feature_prod_01.jpg"
                       className="card-img-top"
@@ -181,31 +192,31 @@ export class Home extends React.Component {
                   </Link>
                   <div className="card-body">
                     <ul className="list-unstyled d-flex justify-content-between">
-                      <li>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-muted fa fa-star"></i>
-                      </li>
                       <li className="text-muted text-right">Rp. 350.000 </li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
+                      onClick={() => {
+                        sessionStorage.setItem("value2", "20");
+                      }}
                     >
                       Chino
                     </Link>
                     <p className="card-text">
                       Made from strech of cotton, best to wear at summer
                     </p>
-                    <p className="text-muted">Reviews (124)</p>
                   </div>
                 </div>
               </div>
               <div className="col-12 col-md-4 mb-4">
                 <div className="card h-100">
-                  <Link to="/shop-single">
+                  <Link
+                    to="/shop-single"
+                    onClick={() => {
+                      sessionStorage.setItem("value2", "10");
+                    }}
+                  >
                     <img
                       src="./static/img/feature_prod_02.jpg"
                       className="card-img-top prod2"
@@ -214,18 +225,14 @@ export class Home extends React.Component {
                   </Link>
                   <div className="card-body">
                     <ul className="list-unstyled d-flex justify-content-between">
-                      <li>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-muted fa fa-star"></i>
-                      </li>
                       <li className="text-muted text-right">Rp. 599.000</li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
+                      onClick={() => {
+                        sessionStorage.setItem("value2", "10");
+                      }}
                     >
                       Chernobyl
                     </Link>
@@ -233,13 +240,17 @@ export class Home extends React.Component {
                       Basen on real life event that occurred on 26 April 1986,
                       Pripyat.
                     </p>
-                    <p className="text-muted">Reviews (1048)</p>
                   </div>
                 </div>
               </div>
               <div className="col-12 col-md-4 mb-4">
                 <div className="card h-100">
-                  <Link to="/shop-single">
+                  <Link
+                    to="/shop-single"
+                    onClick={() => {
+                      sessionStorage.setItem("value2", "5");
+                    }}
+                  >
                     <img
                       src="./static/img/feature_prod_03.jpg"
                       className="card-img-top"
@@ -248,23 +259,18 @@ export class Home extends React.Component {
                   </Link>
                   <div className="card-body">
                     <ul className="list-unstyled d-flex justify-content-between">
-                      <li>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                        <i className="text-warning fa fa-star"></i>
-                      </li>
                       <li className="text-muted text-right">Rp. 399.000</li>
                     </ul>
                     <Link
                       to="/shop-single"
                       className="h2 text-decoration-none text-dark"
+                      onClick={() => {
+                        sessionStorage.setItem("value2", "5");
+                      }}
                     >
                       Muse
                     </Link>
                     <p className="card-text">"For you my Muse"</p>
-                    <p className="text-muted">Reviews (2074)</p>
                   </div>
                 </div>
               </div>

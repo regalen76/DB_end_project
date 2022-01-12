@@ -51,6 +51,27 @@ def getRoutes(request):
             '/api/price/',
             '/api/items/',
             '/api/carts/',
+            '/api/carts/<str:pk>/delete/',
+            '/api/carts/<str:pk>/<str:qt>/update/',
+            '/api/carts/<str:qt>/<str:pk>/<str:ty>/add/',
+            '/api/shops/',
+            '/api/shops/tshirt/',
+            '/api/shops/sweater/',
+            '/api/shops/jeans/',
+            '/api/shops/shorts/',
+            '/api/items/<str:pk>/single/'
+            '/api/order/',
+            '/api/ordercount/',
+            '/api/orderid/<str:pk>/',
+            '/api/orderid/items/<str:pk>/',
+            '/api/pay/<str:pk>/',
+            '/api/submit/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/<str:quantity>/<str:prodname>/<str:prodsize>/',
+            '/api/submitcart/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/',
+            '/api/deletecart2/',
+            '/api/categoryx/',
+            '/api/categoryx2/',
+            '/api/categoryx3/',
+            '/api/categoryx4/',
         },
     ]
 
@@ -163,7 +184,7 @@ def getShopShorts(request):
 def getItemSingle(request,pk):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT product.productid, product.productname, product.productdesc, product.price FROM product WHERE product.productid = %s",[pk])
+        cursor.execute("SELECT product.productid, product.productname, product.productdesc, product.price, product.imgurl FROM product WHERE product.productid = %s",[pk])
         row = cursor.fetchall()
     return Response (row)
 
@@ -251,6 +272,34 @@ def deleteCart2(request):
         current_user= request.user
         cursor.execute("DELETE cartitem FROM cartitem JOIN cart ON cartitem.cartid = cart.cartid AND cart.userid = %s",[current_user.id])
         cursor.execute("SELECT * FROM cartitem")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def category(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT totalpercategory FROM category WHERE categoryid = 1")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def category2(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT totalpercategory FROM category WHERE categoryid = 2")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def category3(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT totalpercategory FROM category WHERE categoryid = 3")
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+def category4(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT totalpercategory FROM category WHERE categoryid = 4")
         row = cursor.fetchall()
     return Response (row)
 

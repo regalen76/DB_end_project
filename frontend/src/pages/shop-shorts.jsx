@@ -30,44 +30,27 @@ const Items = () => {
     }
   };
 
-  // let deleteCartItem = async (e) => {
-  //   let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
-  //   let response = await fetch(`/api/carts/${id}/delete/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + String(authTokens.access),
-  //     },
-  //   });
-  //   await response.json();
+  let [notes2, setNotes2] = useState([]);
 
-  //   if (response.status === 200) {
-  //     window.location.reload();
-  //   } else {
-  //     logoutUser();
-  //   }
-  // };
+  useEffect(() => {
+    getNotes2();
+  }, []);
 
-  // let UpdateQuantityItem = async (e) => {
-  //   let id = e.currentTarget.parentNode.parentNode.getAttribute("data-index");
-  //   let response = await fetch(`/api/carts/${id}/${quantity.text}/update/`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + String(authTokens.access),
-  //     },
-  //   });
-  //   await response.json();
+  let getNotes2 = async () => {
+    let response = await fetch("/api/categoryx4/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await response.json();
 
-  //   if (response.status === 200) {
-  //     window.location.reload();
-  //   } else {
-  //     logoutUser();
-  //   }
-  // };
-
-  // let [quantity, setQuantity] = useState([]);
-  // let [showButton, setShowButton] = useState(false);
+    if (response.status === 200) {
+      setNotes2(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
 
   return (
     <div className="row">
@@ -106,7 +89,9 @@ const Items = () => {
           <div className="col-md-6">
             <ul className="list-inline shop-top-menu pb-3 pt-1">
               <li className="list-inline-item">
-                <h3 className="h3 text-dark text-decoration-none">Shorts</h3>
+                <h3 className="h3 text-dark text-decoration-none">
+                  Shorts, {notes2[0]} Items
+                </h3>
               </li>
             </ul>
           </div>
@@ -118,7 +103,7 @@ const Items = () => {
                 <div className="card rounded-0">
                   <img
                     className="card-img rounded-0 img-fluid"
-                    src={`static/img/shop_0${user[0]}.jpg`}
+                    src={`${user[5]}`}
                   />
                   <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                     <ul className="list-unstyled">
@@ -149,15 +134,7 @@ const Items = () => {
                       <span className="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
                     </li>
                   </ul>
-                  <ul className="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-muted fa fa-star"></i>
-                      <i className="text-muted fa fa-star"></i>
-                    </li>
-                  </ul>
+                  <ul className="list-unstyled d-flex justify-content-center mb-1"></ul>
                   <p className="text-center mb-0">Rp. {user[4]}</p>
                 </div>
               </div>

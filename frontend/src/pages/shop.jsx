@@ -77,7 +77,7 @@ const Items = () => {
                 <div className="card rounded-0">
                   <img
                     className="card-img rounded-0 img-fluid"
-                    src={`static/img/shop_0${user[0]}.jpg`}
+                    src={`${user[5]}`}
                   />
                   <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                     <ul className="list-unstyled">
@@ -108,15 +108,7 @@ const Items = () => {
                       <span className="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
                     </li>
                   </ul>
-                  <ul className="list-unstyled d-flex justify-content-center mb-1">
-                    <li>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-warning fa fa-star"></i>
-                      <i className="text-muted fa fa-star"></i>
-                      <i className="text-muted fa fa-star"></i>
-                    </li>
-                  </ul>
+                  <ul className="list-unstyled d-flex justify-content-center mb-1"></ul>
                   <p className="text-center mb-0">Rp. {user[4]}</p>
                 </div>
               </div>

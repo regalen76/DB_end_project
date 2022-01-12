@@ -30,6 +30,10 @@ urlpatterns = [
     path('submit/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/<str:quantity>/<str:prodname>/<str:prodsize>/', views.submit, name='submit'),
     path('submitcart/<str:bank>/<str:name>/<str:phone>/<str:address>/<str:price>/', views.submitcart, name='submitcart'),
     path('deletecart2/', views.deleteCart2, name='submitcart'),
+    path('categoryx/', views.category, name='category'),
+    path('categoryx2/', views.category2, name='category2'),
+    path('categoryx3/', views.category3, name='category3'),
+    path('categoryx4/', views.category4, name='category4'),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     

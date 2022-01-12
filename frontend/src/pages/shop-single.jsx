@@ -82,139 +82,10 @@ const Itemsingle = () => {
             <div className="card mb-3">
               <img
                 className="card-img img-fluid"
-                src={`static/img/shop_0${user[0]}.jpg`}
+                src={`${user[4]}`}
                 alt="Card image cap"
                 id="product-detail"
               />
-            </div>
-            <div className="row">
-              <div className="col-1 align-self-center">
-                <a
-                  href="#multi-item-example"
-                  role="button"
-                  data-bs-slide="prev"
-                >
-                  <i className="text-dark fas fa-chevron-left"></i>
-                  <span className="sr-only">Previous</span>
-                </a>
-              </div>
-
-              <div
-                id="multi-item-example"
-                className="col-10 carousel slide carousel-multi-item"
-                data-bs-ride="carousel"
-              >
-                <div
-                  className="carousel-inner product-links-wap"
-                  role="listbox"
-                >
-                  <div className="carousel-item active">
-                    <div className="row">
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_01.jpg"
-                            alt="Product Image 1"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_02.jpg"
-                            alt="Product Image 2"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_03.jpg"
-                            alt="Product Image 3"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="carousel-item">
-                    <div className="row">
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_04.jpg"
-                            alt="Product Image 4"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_05.jpg"
-                            alt="Product Image 5"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_06.jpg"
-                            alt="Product Image 6"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="carousel-item">
-                    <div className="row">
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_07.jpg"
-                            alt="Product Image 7"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_08.jpg"
-                            alt="Product Image 8"
-                          />
-                        </a>
-                      </div>
-                      <div className="col-4">
-                        <a href="#">
-                          <img
-                            className="card-img img-fluid"
-                            src="static/img/product_single_09.jpg"
-                            alt="Product Image 9"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-1 align-self-center">
-                <a
-                  href="#multi-item-example"
-                  role="button"
-                  data-bs-slide="next"
-                >
-                  <i className="text-dark fas fa-chevron-right"></i>
-                  <span className="sr-only">Next</span>
-                </a>
-              </div>
             </div>
           </div>
           <div className="col-lg-7 mt-5">
@@ -222,16 +93,7 @@ const Itemsingle = () => {
               <div className="card-body" key={user[0]}>
                 <h1 className="h2">{user[1]}</h1>
                 <p className="h3 py-2">Rp. {user[3]}</p>
-                <p className="py-2">
-                  <i className="fa fa-star text-warning"></i>
-                  <i className="fa fa-star text-warning"></i>
-                  <i className="fa fa-star text-warning"></i>
-                  <i className="fa fa-star text-warning"></i>
-                  <i className="fa fa-star text-secondary"></i>
-                  <span className="list-inline-item text-dark">
-                    Rating 4.8 | 36 Comments
-                  </span>
-                </p>
+                <p className="py-2"></p>
 
                 <h6>Description:</h6>
                 <p>{user[2]}</p>
