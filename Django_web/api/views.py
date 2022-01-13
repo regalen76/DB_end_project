@@ -190,6 +190,25 @@ def getItemSingle(request,pk):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def getStock(request,productid,productsize):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("SELECT stock FROM productsize WHERE productid = %s AND productsize = %s",(productid,productsize))
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def updateStock(request,updt,productid,productsize):
+    with connection.cursor() as cursor:
+        current_user = request.user
+        cursor.execute("UPDATE productsize SET stock = %s WHERE productsize.productid = %s AND productsize.productsize = %s",(updt,productid,productsize))
+        cursor.execute("SELECT stock FROM productsize WHERE productid = %s AND productsize = %s",(productid,productsize))
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def addToCart(request,qt,pk,ty):
     with connection.cursor() as cursor:
         current_user = request.user
@@ -230,7 +249,16 @@ def orderid(request,pk):
 def orderiditems(request,pk):
     with connection.cursor() as cursor:
         current_user= request.user
-        cursor.execute("SELECT product.productname, productsize.productsize, product.price, orderitem.quantity FROM orderitem JOIN productsize ON orderitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid WHERE orderitem.orderid = %s",[pk])
+        cursor.execute("SELECT product.productname, productsize.productsize, product.price, orderitem.quantity, product.productid, productsize.stock FROM orderitem JOIN productsize ON orderitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid WHERE orderitem.orderid = %s",[pk])
+        row = cursor.fetchall()
+    return Response (row)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def updateCancelled(request,pk):
+    with connection.cursor() as cursor:
+        current_user= request.user
+        cursor.execute("UPDATE orderlist SET orderstatus = 'cancelled' WHERE orderlist.orderid = %s",[pk])
         row = cursor.fetchall()
     return Response (row)
 
@@ -238,7 +266,7 @@ def orderiditems(request,pk):
 def pay(request,pk):
     with connection.cursor() as cursor:
         current_user= request.user
-        cursor.execute("UPDATE orderlist SET orderstatus = 'paid' FROM orderlist JOIN paymentdetail ON orderlist.paymentid = paymentdetail.paymentid WHERE paymentdetail.vanumber = %s",[pk])
+        cursor.execute("if EXISTS ( SELECT *FROM orderlist JOIN paymentdetail ON orderlist.paymentid = paymentdetail.paymentid WHERE paymentdetail.vanumber = %s AND orderlist.orderstatus = 'pending') UPDATE orderlist SET orderstatus = 'paid' FROM orderlist JOIN paymentdetail ON orderlist.paymentid = paymentdetail.paymentid WHERE paymentdetail.vanumber = %s",(pk,pk))
         cursor.execute("SELECT * FROM orderlist")
         row = cursor.fetchall()
     return Response (row)

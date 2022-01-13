@@ -324,10 +324,15 @@ export const Modal3 = ({ handleClose }) => {
   let [bank, setBank] = useState([]);
 
   let [notes, setNotes] = useState([]);
+  let [notes2, setNotes2] = useState([]);
+
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getNotes();
+  }, []);
+  useEffect(() => {
+    getNotes2();
   }, []);
 
   let getNotes = async () => {
@@ -348,12 +353,50 @@ export const Modal3 = ({ handleClose }) => {
     }
   };
 
+  let getNotes2 = async () => {
+    var value3 = sessionStorage.getItem("value2");
+    let response = await fetch(`/api/stock/${value3}/${valuez}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      setNotes2(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+
   let BuyItem = async () => {
-    console.log(notes[0][0]);
     let response = await fetch(
       `/api/submit/${bank}/${first_name} ${last_name}/${phone}/${address}/${
         notes[0][3] * valuex
       }/${valuex}/${notes[0][1]}/${valuez}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      }
+    );
+    await response.json();
+
+    if (response.status === 200) {
+      window.location.reload();
+    } else {
+      logoutUser();
+    }
+  };
+
+  let UpdateStock = async () => {
+    var value3 = sessionStorage.getItem("value2");
+    let response = await fetch(
+      `/api/stock/update/${notes2[0][0] - valuex}/${value3}/${valuez}/`,
       {
         method: "GET",
         headers: {
@@ -525,36 +568,36 @@ export const Modal3 = ({ handleClose }) => {
               <span className="signuptitle">Confirm details</span>
               <div className="userdetails">
                 <div className="field">
-                  <label className="formlabel">First Name :</label>
-                  <p>{first_name}</p>
+                  <label className="formlabel fuiyoh2">First Name :</label>
+                  <p className="fuiyoh">{first_name}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Last Name :</label>
-                  <p>{last_name}</p>
+                  <label className="formlabel fuiyoh2">Last Name :</label>
+                  <p className="fuiyoh">{last_name}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Phone :</label>
-                  <p>{phone}</p>
+                  <label className="formlabel fuiyoh2">Phone :</label>
+                  <p className="fuiyoh">{phone}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Address :</label>
-                  <p>{address}</p>
+                  <label className="formlabel fuiyoh2">Address :</label>
+                  <p className="fuiyoh">{address}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Bank :</label>
-                  <p>{bank}</p>
+                  <label className="formlabel fuiyoh2">Bank :</label>
+                  <p className="fuiyoh">{bank}</p>
                 </div>
               </div>
 
               <div className="userdetails">
                 {notes.map((user) => (
                   <div className="field">
-                    <label className="formlabel">Product :</label>
-                    <p>
+                    <label className="formlabel fuiyoh2">Product :</label>
+                    <p className="fuiyoh">
                       {user[1]} {valuez} - Rp. {user[3]}, Quantity : {valuex},
                       Subtotal : Rp. {user[3] * valuex}
                     </p>
@@ -562,7 +605,14 @@ export const Modal3 = ({ handleClose }) => {
                 ))}
               </div>
 
-              <button onClick={BuyItem}>Confirm</button>
+              <button
+                onClick={() => {
+                  BuyItem();
+                  UpdateStock();
+                }}
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </motion.div>
@@ -814,36 +864,36 @@ export const Modal4 = ({ handleClose }) => {
               <span className="signuptitle">Confirm details</span>
               <div className="userdetails">
                 <div className="field">
-                  <label className="formlabel">First Name :</label>
-                  <p>{first_name}</p>
+                  <label className="formlabel fuiyoh2">First Name :</label>
+                  <p className="fuiyoh">{first_name}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Last Name :</label>
-                  <p>{last_name}</p>
+                  <label className="formlabel fuiyoh2">Last Name :</label>
+                  <p className="fuiyoh">{last_name}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Phone :</label>
-                  <p>{phone}</p>
+                  <label className="formlabel fuiyoh2">Phone :</label>
+                  <p className="fuiyoh">{phone}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Address :</label>
-                  <p>{address}</p>
+                  <label className="formlabel fuiyoh2">Address :</label>
+                  <p className="fuiyoh">{address}</p>
                 </div>
 
                 <div className="field">
-                  <label className="formlabel">Bank :</label>
-                  <p>{bank}</p>
+                  <label className="formlabel fuiyoh2">Bank :</label>
+                  <p className="fuiyoh">{bank}</p>
                 </div>
               </div>
 
               <div className="userdetails">
                 {notes.map((user) => (
                   <div className="field">
-                    <label className="formlabel">Product :</label>
-                    <p>
+                    <label className="formlabel fuiyoh2">Product :</label>
+                    <p className="fuiyoh">
                       {user[0]} {user[1]} - Rp. {user[3]}, Quantity : {user[2]},
                       Subtotal : Rp. {user[4]}
                     </p>

@@ -338,3 +338,14 @@ Custom Css
   max-inline-size: 63rem;
   margin-inline: auto;
 }
+
+.fuiyoh {
+  color: white;
+  position: relative;
+  top: 16px;
+}
+
+.fuiyoh2 {
+  color: white;
+  background: none;
+}

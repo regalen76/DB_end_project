@@ -111,7 +111,6 @@ export class Home extends React.Component {
                   </li>
                 </ul>
               </div>
-              <div className="col-auto"></div>
             </div>
           </div>
 

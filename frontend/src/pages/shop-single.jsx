@@ -8,6 +8,7 @@ import useModal from "./components/hooks/useModal";
 
 const Itemsingle = () => {
   let [notes, setNotes] = useState([]);
+  let [notes2, setNotes2] = useState([]);
 
   let [sizelOpen, setSizelOpen] = useState(false);
   let [sizelOpen2, setSizelOpen2] = useState(false);
@@ -26,7 +27,9 @@ const Itemsingle = () => {
   };
 
   let incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    if (quantity < notes2[0][0]) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
   };
 
   let { value, setValue, logoutUser, authTokens } = useContext(AuthContext);
@@ -48,6 +51,108 @@ const Itemsingle = () => {
 
     if (response.status === 200) {
       setNotes(data);
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+
+  let getNotes2 = async () => {
+    let response = await fetch(`/api/stock/${notes[0][0]}/S/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      if (data[0][0] === 0) {
+        setSizelOpen(false);
+        setSizelOpen2(false);
+        setSizelOpen3(false);
+        setSizelOpen4(false);
+        setSizeNow("null");
+        alert("stock is 0");
+      } else {
+        setNotes2(data);
+      }
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+
+  let getNotes3 = async () => {
+    let response = await fetch(`/api/stock/${notes[0][0]}/M/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      if (data[0][0] === 0) {
+        setSizelOpen(false);
+        setSizelOpen2(false);
+        setSizelOpen3(false);
+        setSizelOpen4(false);
+        setSizeNow("null");
+        alert("stock is 0");
+      } else {
+        setNotes2(data);
+      }
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+  let getNotes4 = async () => {
+    let response = await fetch(`/api/stock/${notes[0][0]}/L/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      if (data[0][0] === 0) {
+        setSizelOpen(false);
+        setSizelOpen2(false);
+        setSizelOpen3(false);
+        setSizelOpen4(false);
+        setSizeNow("null");
+        alert("stock is 0");
+      } else {
+        setNotes2(data);
+      }
+    } else if (response.statusText === "Unauthorized") {
+      logoutUser();
+    }
+  };
+  let getNotes5 = async () => {
+    let response = await fetch(`/api/stock/${notes[0][0]}/XL/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    let data = await response.json();
+
+    if (response.status === 200) {
+      if (data[0][0] === 0) {
+        setSizelOpen(false);
+        setSizelOpen2(false);
+        setSizelOpen3(false);
+        setSizelOpen4(false);
+        setSizeNow("null");
+        alert("stock is 0");
+      } else {
+        setNotes2(data);
+      }
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
@@ -110,6 +215,8 @@ const Itemsingle = () => {
                             onClick={() => {
                               setSizelOpen(false);
                               setSizeNow("null");
+                              setNotes2(null);
+                              setQuantity(1);
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -124,6 +231,8 @@ const Itemsingle = () => {
                               setSizelOpen4(false);
                               setSizelOpen(true);
                               setSizeNow("S");
+                              setQuantity(1);
+                              getNotes2();
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -139,6 +248,8 @@ const Itemsingle = () => {
                             onClick={() => {
                               setSizelOpen2(false);
                               setSizeNow("null");
+                              setNotes2(null);
+                              setQuantity(1);
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -153,6 +264,8 @@ const Itemsingle = () => {
                               setSizelOpen4(false);
                               setSizelOpen2(true);
                               setSizeNow("M");
+                              setQuantity(1);
+                              getNotes3();
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -168,6 +281,8 @@ const Itemsingle = () => {
                             onClick={() => {
                               setSizelOpen3(false);
                               setSizeNow("null");
+                              setNotes2(null);
+                              setQuantity(1);
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -182,6 +297,8 @@ const Itemsingle = () => {
                               setSizelOpen4(false);
                               setSizelOpen3(true);
                               setSizeNow("L");
+                              setQuantity(1);
+                              getNotes4();
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -197,6 +314,8 @@ const Itemsingle = () => {
                             onClick={() => {
                               setSizelOpen4(false);
                               setSizeNow("null");
+                              setNotes2(null);
+                              setQuantity(1);
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -211,6 +330,8 @@ const Itemsingle = () => {
                               setSizelOpen3(false);
                               setSizelOpen4(true);
                               setSizeNow("XL");
+                              setQuantity(1);
+                              getNotes5();
                             }}
                             className="btn btn-success btn-size"
                             id="btn-shop"
@@ -229,7 +350,13 @@ const Itemsingle = () => {
                           className="btn btn-success"
                           whileTap={{ scale: 1.3 }}
                           id="btn-minus"
-                          onClick={decrementQuantity}
+                          onClick={() => {
+                            if (sizeNow === "null") {
+                              alert("choose size first");
+                            } else {
+                              decrementQuantity();
+                            }
+                          }}
                         >
                           -
                         </motion.button>
@@ -244,7 +371,13 @@ const Itemsingle = () => {
                           whileTap={{ scale: 1.3 }}
                           className="btn btn-success"
                           id="btn-plus"
-                          onClick={incrementQuantity}
+                          onClick={() => {
+                            if (sizeNow === "null") {
+                              alert("choose size first");
+                            } else {
+                              incrementQuantity();
+                            }
+                          }}
                         >
                           +
                         </motion.button>
@@ -307,111 +440,6 @@ export class Home extends React.Component {
 
         <footer className="bg-dark" id="tempaltemo_footer">
           <div className="container">
-            <div className="row">
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-success border-bottom pb-3 border-light logo">
-                  Zay Shop
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <i className="fas fa-map-marker-alt fa-fw"></i>
-                    123 Consectetur at ligula 10660
-                  </li>
-                  <li>
-                    <i className="fa fa-phone fa-fw"></i>
-                    <a className="text-decoration-none" href="tel:010-020-0340">
-                      010-020-0340
-                    </a>
-                  </li>
-                  <li>
-                    <i className="fa fa-envelope fa-fw"></i>
-                    <a
-                      className="text-decoration-none"
-                      href="mailto:info@company.com"
-                    >
-                      info@company.com
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Products
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Luxury
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Wear
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Men's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Women's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Popular Dress
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Gym Accessories
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Shoes
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Further Info
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Shop Locations
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      FAQs
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
             <div className="row text-light mb-4">
               <div className="col-12 mb-3">
                 <div className="w-100 my-3 border-top border-light"></div>
@@ -455,22 +483,6 @@ export class Home extends React.Component {
                     </a>
                   </li>
                 </ul>
-              </div>
-              <div className="col-auto">
-                <label className="sr-only" htmlFor="subscribeEmail">
-                  Email address
-                </label>
-                <div className="input-group mb-2">
-                  <input
-                    type="text"
-                    className="form-control bg-dark border-light"
-                    id="subscribeEmail"
-                    placeholder="Email address"
-                  />
-                  <div className="input-group-text btn-success text-light">
-                    Subscribe
-                  </div>
-                </div>
               </div>
             </div>
           </div>

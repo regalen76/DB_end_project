@@ -11,6 +11,7 @@ const Trueitems = () => {
   let [notes, setNotes] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
   var valuex2 = sessionStorage.getItem("valuex2");
+  var valuex5 = sessionStorage.getItem("valuex5");
 
   useEffect(() => {
     getNotes();
@@ -32,6 +33,52 @@ const Trueitems = () => {
       logoutUser();
     }
   };
+
+  let Cancelled = async () => {
+    let response = await fetch(`/api/orderid/cancel/${valuex2}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
+    await response.json();
+
+    if (response.status === 200) {
+      window.location.reload();
+    } else {
+      logoutUser();
+    }
+  };
+
+  let UpdateStock = async () => {
+    for (var i = 0; i < notes.length; i++) {
+      let response = await fetch(
+        `/api/stock/update/${notes[i][5] + notes[i][3]}/${notes[i][4]}/${
+          notes[i][1]
+        }/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        }
+      );
+      await response.json();
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        logoutUser();
+      }
+    }
+  };
+
+  if (valuex5 === "true") {
+    Cancelled();
+    UpdateStock();
+  }
 
   return (
     <div>
@@ -70,9 +117,36 @@ const Items = () => {
   let [notes, setNotes] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
   var valuex2 = sessionStorage.getItem("valuex2");
+  var times;
 
   useEffect(() => {
     getNotes();
+
+    let interval = setInterval(() => {
+      let target = new Date(times);
+      let now = new Date();
+      let difference = target.getTime() + 1 * 60 * 60 * 1000 - now.getTime();
+
+      let d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      setDays(d);
+
+      let h = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      setHours(h);
+
+      let m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      setMinutes(m);
+
+      let s = Math.floor((difference % (1000 * 60)) / 1000);
+      setSeconds(s);
+
+      if (d <= 0 && h <= 0 && m <= 0 && s <= m) {
+        setTimeout(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   let getNotes = async () => {
@@ -85,19 +159,21 @@ const Items = () => {
     });
     let data = await response.json();
 
-    console.log(data);
-
     if (response.status === 200) {
       setNotes(data);
+      times = data[0][4];
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
   };
 
-  let [quantity, setQuantity] = useState([]);
-  let [showButton, setShowButton] = useState(false);
+  let [timeout, setTimeout] = useState(false);
+  let [days, setDays] = useState(0);
+  let [hours, setHours] = useState(0);
+  let [minutes, setMinutes] = useState(0);
+  let [seconds, setSeconds] = useState(0);
 
-  let { modalOpen, close, open } = useModal();
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -106,6 +182,28 @@ const Items = () => {
           <div className="row text-center pt-5 pb-3">
             <div className="col-lg-6 m-auto">
               <h1 className="h1">ORDER ID #{user[0]} </h1>
+              {(() => {
+                if (timeout === true && user[8] === "cancelled") {
+                  return <h1 className="h1"> Cancelled </h1>;
+                } else if (timeout === false && user[8] === "pending") {
+                  return (
+                    <h1 className="h1">
+                      {minutes} Minutes - {seconds} Seconds
+                    </h1>
+                  );
+                } else if (timeout === false && user[8] === "paid") {
+                  return <h1 className="h1"> Paid </h1>;
+                } else if (timeout === false && user[8] === "cancelled") {
+                  return <h1 className="h1"> Cancelled </h1>;
+                }
+              })()}
+              {(() => {
+                if (timeout === true && user[8] === "pending") {
+                  sessionStorage.setItem("valuex5", true);
+                } else if (timeout === false) {
+                  sessionStorage.setItem("valuex5", false);
+                }
+              })()}
             </div>
           </div>
 
@@ -198,111 +296,6 @@ export class Home extends React.Component {
 
         <footer className="bg-dark" id="tempaltemo_footer">
           <div className="container">
-            <div className="row">
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-success border-bottom pb-3 border-light logo">
-                  Zay Shop
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <i className="fas fa-map-marker-alt fa-fw"></i>
-                    123 Consectetur at ligula 10660
-                  </li>
-                  <li>
-                    <i className="fa fa-phone fa-fw"></i>
-                    <a className="text-decoration-none" href="tel:010-020-0340">
-                      010-020-0340
-                    </a>
-                  </li>
-                  <li>
-                    <i className="fa fa-envelope fa-fw"></i>
-                    <a
-                      className="text-decoration-none"
-                      href="mailto:info@company.com"
-                    >
-                      info@company.com
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Products
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Luxury
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Wear
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Men's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Women's Shoes
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Popular Dress
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Gym Accessories
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Sport Shoes
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-md-4 pt-5">
-                <h2 className="h2 text-light border-bottom pb-3 border-light">
-                  Further Info
-                </h2>
-                <ul className="list-unstyled text-light footer-link-list">
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Shop Locations
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      FAQs
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-decoration-none" href="#">
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
             <div className="row text-light mb-4">
               <div className="col-12 mb-3">
                 <div className="w-100 my-3 border-top border-light"></div>
@@ -346,22 +339,6 @@ export class Home extends React.Component {
                     </a>
                   </li>
                 </ul>
-              </div>
-              <div className="col-auto">
-                <label className="sr-only" htmlFor="subscribeEmail">
-                  Email address
-                </label>
-                <div className="input-group mb-2">
-                  <input
-                    type="text"
-                    className="form-control bg-dark border-light"
-                    id="subscribeEmail"
-                    placeholder="Email address"
-                  />
-                  <div className="input-group-text btn-success text-light">
-                    Subscribe
-                  </div>
-                </div>
               </div>
             </div>
           </div>
