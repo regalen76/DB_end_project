@@ -23,7 +23,7 @@ class OrderlistAdmin(admin.ModelAdmin):
     list_display = ['orderid','userid','paymentid','receivername','receiverphone','receiveraddress','orderdate','totalpayment','orderstatus']
 
 class PaymentdetailAdmin(admin.ModelAdmin):
-    list_display = ['paymentid','paymenttype','transactiontime','vanumber']
+    list_display = ['paymentid','paymenttype','vanumber']
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['productid','categoryid','productname','productdesc','price','imgurl']

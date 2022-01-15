@@ -131,7 +131,6 @@ class Orderlist(models.Model):
 class Paymentdetail(models.Model):
     paymentid = models.BigAutoField(primary_key=True)
     paymenttype = models.CharField(max_length=20, blank=True, null=True)
-    transactiontime = models.DateTimeField(blank=True, null=True)
     vanumber = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:

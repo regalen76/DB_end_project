@@ -151,7 +151,7 @@ def getShop(request):
 def getShopTshirt(request):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT * FROM product where categoryid = 1")
+        cursor.execute("SELECT * FROM [ ViewTshirt ]")
         row = cursor.fetchall()
     return Response (row)
 
@@ -159,7 +159,7 @@ def getShopTshirt(request):
 def getShopSweater(request):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT * FROM product where categoryid = 2")
+        cursor.execute("SELECT * FROM [ ViewSweater ]")
         row = cursor.fetchall()
     return Response (row)
 
@@ -167,7 +167,7 @@ def getShopSweater(request):
 def getShopJeans(request):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT * FROM product where categoryid = 3")
+        cursor.execute("SELECT * FROM [ ViewJeans ]")
         row = cursor.fetchall()
     return Response (row)
 
@@ -175,7 +175,7 @@ def getShopJeans(request):
 def getShopShorts(request):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT * FROM product where categoryid = 4")
+        cursor.execute("SELECT * FROM [ ViewShorts ]")
         row = cursor.fetchall()
     return Response (row)
 
@@ -193,7 +193,7 @@ def getItemSingle(request,pk):
 def getStock(request,productid,productsize):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT stock FROM productsize WHERE productid = %s AND productsize = %s",(productid,productsize))
+        cursor.execute("EXEC getStock @productid = %s, @productsize = %s",(productid,productsize))
         row = cursor.fetchall()
     return Response (row)
 
@@ -202,7 +202,7 @@ def getStock(request,productid,productsize):
 def updateStock(request,updt,productid,productsize):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("UPDATE productsize SET stock = %s WHERE productsize.productid = %s AND productsize.productsize = %s",(updt,productid,productsize))
+        cursor.execute("EXEC updtStock @stock = %s, @productid = %s, @productsize = %s",(updt,productid,productsize))
         cursor.execute("SELECT stock FROM productsize WHERE productid = %s AND productsize = %s",(productid,productsize))
         row = cursor.fetchall()
     return Response (row)
@@ -249,7 +249,7 @@ def orderid(request,pk):
 def orderiditems(request,pk):
     with connection.cursor() as cursor:
         current_user= request.user
-        cursor.execute("SELECT product.productname, productsize.productsize, product.price, orderitem.quantity, product.productid, productsize.stock FROM orderitem JOIN productsize ON orderitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid WHERE orderitem.orderid = %s",[pk])
+        cursor.execute("EXEC orderiditems @orderid=%s",[pk])
         row = cursor.fetchall()
     return Response (row)
 
