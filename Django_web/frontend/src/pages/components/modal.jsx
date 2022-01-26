@@ -392,7 +392,9 @@ export const Modal3 = ({ handleClose }) => {
       logoutUser();
     }
   };
-
+  console.log("ini notes2 " + notes2);
+  var value3 = sessionStorage.getItem("value2");
+  console.log("ini value 3 " + value3);
   let UpdateStock = async () => {
     var value3 = sessionStorage.getItem("value2");
     let response = await fetch(
@@ -415,7 +417,9 @@ export const Modal3 = ({ handleClose }) => {
   };
 
   var valuex = sessionStorage.getItem("valuex");
+  console.log("ini valuex " + valuex);
   var valuez = sessionStorage.getItem("valuez");
+  console.log("ini valuez " + valuez);
 
   return (
     <Backdrop onClick={handleClose}>
@@ -713,6 +717,34 @@ export const Modal4 = ({ handleClose }) => {
     }
   };
 
+  let UpdateStock = async () => {
+    for (var i = 0; i < notes.length; i++) {
+      var value3 = sessionStorage.getItem("value2");
+      let response = await fetch(
+        `/api/stock/update/${notes[i][7] - notes[i][2]}/${notes[i][6]}/${
+          notes[i][1]
+        }/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        }
+      );
+      await response.json();
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        logoutUser();
+      }
+    }
+  };
+
+  console.log(notes);
+  console.log(notes2);
+
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
@@ -904,6 +936,7 @@ export const Modal4 = ({ handleClose }) => {
               <button
                 onClick={() => {
                   BuyItem();
+                  UpdateStock();
                   DeleteCart();
                 }}
               >

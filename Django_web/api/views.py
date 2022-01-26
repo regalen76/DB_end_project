@@ -117,7 +117,7 @@ def getTotalItem(request):
 def getCart(request):
     with connection.cursor() as cursor:
         current_user = request.user
-        cursor.execute("SELECT product.productname,productsize.productsize,cartitem.quantity,product.price,cartitem.quantity * product.price AS subtotal,cartitem.cartitemid FROM cartitem JOIN productsize ON cartitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid",[current_user.id])
+        cursor.execute("SELECT product.productname,productsize.productsize,cartitem.quantity,product.price,cartitem.quantity * product.price AS subtotal,cartitem.cartitemid,product.productid,productsize.stock FROM cartitem JOIN productsize ON cartitem.sizeid = productsize.sizeid JOIN product ON productsize.productid = product.productid,cart WHERE cart.userid = %s AND cart.cartid = cartitem.cartid",[current_user.id])
         row = cursor.fetchall()
     return Response (row)
 
