@@ -303,6 +303,18 @@ export const Modal2 = ({ handleClose }) => {
       >
         <div id="profilepage">
           <div id="profiletitle">{user && <p>Hello, {user.username}</p>}</div>
+          <div id="profiletitle2">
+            {user && <p>First Name : {user.first_name}</p>}
+          </div>
+          <div id="profiletitle2">
+            {user && <p>Last Name : {user.last_name}</p>}
+          </div>
+          <div id="profiletitle2">{user && <p>Email : {user.email}</p>}</div>
+          <div id="profiletitle2">{user && <p>Gender : {user.gender}</p>}</div>
+          <div id="profiletitle2">{user && <p>Phone : {user.phone}</p>}</div>
+          <div id="profiletitle2">
+            {user && <p>Address : {user.address}</p>}
+          </div>
           <button id="logoutbutton" onClick={logoutUser}>
             Logout
           </button>
@@ -392,9 +404,7 @@ export const Modal3 = ({ handleClose }) => {
       logoutUser();
     }
   };
-  console.log("ini notes2 " + notes2);
-  var value3 = sessionStorage.getItem("value2");
-  console.log("ini value 3 " + value3);
+
   let UpdateStock = async () => {
     var value3 = sessionStorage.getItem("value2");
     let response = await fetch(
@@ -610,6 +620,7 @@ export const Modal3 = ({ handleClose }) => {
               </div>
 
               <button
+                className="customed2"
                 onClick={() => {
                   BuyItem();
                   UpdateStock();
@@ -680,8 +691,23 @@ export const Modal4 = ({ handleClose }) => {
       logoutUser();
     }
   };
-
   let BuyItem = async () => {
+    let DeleteCart = async () => {
+      let response = await fetch("/api/deletecart2/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      });
+      await response.json();
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        logoutUser();
+      }
+    };
     let response = await fetch(
       `/api/submitcart/${bank}/${first_name} ${last_name}/${phone}/${address}/${notes2[2]}/`,
       {
@@ -695,23 +721,7 @@ export const Modal4 = ({ handleClose }) => {
     await response.json();
 
     if (response.status === 200) {
-      window.location.reload();
-    } else {
-      logoutUser();
-    }
-  };
-  let DeleteCart = async () => {
-    let response = await fetch("/api/deletecart2/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    });
-    await response.json();
-
-    if (response.status === 200) {
-      window.location.reload();
+      DeleteCart();
     } else {
       logoutUser();
     }
@@ -741,9 +751,6 @@ export const Modal4 = ({ handleClose }) => {
       }
     }
   };
-
-  console.log(notes);
-  console.log(notes2);
 
   return (
     <Backdrop onClick={handleClose}>
@@ -937,7 +944,6 @@ export const Modal4 = ({ handleClose }) => {
                 onClick={() => {
                   BuyItem();
                   UpdateStock();
-                  DeleteCart();
                 }}
               >
                 Confirm

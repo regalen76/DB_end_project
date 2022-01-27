@@ -76,7 +76,7 @@ const Items = () => {
               <div className="card mb-4 product-wap rounded-0">
                 <div className="card rounded-0">
                   <img
-                    className="card-img rounded-0 img-fluid"
+                    className="card-img rounded-0 img-fluid customed"
                     src={`${user[5]}`}
                   />
                   <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">

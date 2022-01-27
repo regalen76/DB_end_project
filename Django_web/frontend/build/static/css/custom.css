@@ -276,6 +276,19 @@ Custom Css
   font-family: sans-serif;
 }
 
+#profiletitle2 p {
+  color: #eee;
+  font-size: 14px;
+  padding-top: 0px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  left: -160px;
+  position: relative;
+  text-align: left;
+}
+
 #logoutbutton {
   cursor: pointer;
   background-color: #1d945c;
@@ -348,4 +361,18 @@ Custom Css
 .fuiyoh2 {
   color: white;
   background: none;
+}
+
+.customed {
+  height: 277px;
+}
+
+.customed2 {
+  color: #eeeeee;
+  font: 18px;
+  background: #1d945c;
+  margin: 10px 0px 0px;
+  padding: 1px 6px;
+  border: none;
+  border-radius: 5px;
 }
