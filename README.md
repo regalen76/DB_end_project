@@ -30,3 +30,14 @@ TEST untuk register json:
 "password2": "okehh"
 }
 **Screenshot hasil website:**
+   ![](/Screenshot (658).png)
+   ![](/Screenshot (659).png)
+   ![](/Screenshot (660).png)
+   ![](/Screenshot (661).png)
+   ![](/Screenshot (662).png)
+   ![](/Screenshot (663).png)
+   ![](/Screenshot (664).png)
+   ![](/Screenshot (665).png)
+   ![](/Screenshot (666).png)
+   ![](/Screenshot (657).png)
+   ![](/Screenshot (668).png)
