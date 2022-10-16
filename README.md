@@ -29,3 +29,4 @@ TEST untuk register json:
 "password": "okehh",
 "password2": "okehh"
 }
+**Screenshot hasil website:**
