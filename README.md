@@ -22,13 +22,6 @@ Membuat website dan databasenya dengan template clothing store
    ![](/contoh_menjalankan_server2.png)
 4. Setelah berada di directory itu maka jalankan command: "python manage.py runserver". maka server akan dijalankan dan bisa buka link yang diberikan di cmd tersebut untuk membuka web.
 
-TEST untuk register json:
-{
-"email": "siapasih@gmail.com",
-"username": "testing",
-"password": "okehh",
-"password2": "okehh"
-}
 **Screenshot hasil website:**
    ![](/Screenshot_(658).png)
    ![](/Screenshot_(659).png)
